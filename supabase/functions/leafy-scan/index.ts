@@ -204,6 +204,19 @@ function cleanCareText(value: string | null | undefined) {
   return value.trim();
 }
 
+function cleanPublicCareText(value: string | null | undefined) {
+  const cleaned = cleanCareText(value);
+  if (!cleaned) return null;
+
+  const publicText = cleaned
+    .replace(/\b(?:Trefle|Perenual|PlantNet)\b/gi, "Leafy AI")
+    .replace(/\s*(?:Family|Genus):\s*\[object Object\]\.?/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+
+  return publicText || null;
+}
+
 function hasUsableCare(profile: CareProfile | null) {
   if (!profile) return false;
   return Boolean(
@@ -896,6 +909,15 @@ Deno.serve(async (request) => {
     ? {
         ...careProfile,
         provider: "Leafy AI",
+        summary: cleanPublicCareText(careProfile.summary),
+        watering: cleanPublicCareText(careProfile.watering),
+        sunlight: cleanPublicCareText(careProfile.sunlight),
+        soil: cleanPublicCareText(careProfile.soil),
+        pruning: cleanPublicCareText(careProfile.pruning),
+        propagation: cleanPublicCareText(careProfile.propagation),
+        cycle: cleanPublicCareText(careProfile.cycle),
+        growthHabit: cleanPublicCareText(careProfile.growthHabit),
+        toxicity: cleanPublicCareText(careProfile.toxicity),
       }
     : null;
 
