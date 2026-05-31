@@ -363,23 +363,44 @@ function profileFromPerenualSpecies(
 
 function formatTrefleLight(value: number | null | undefined) {
   if (typeof value !== "number") return null;
-  return `Trefle light score: ${value}/10. Use this as a starting point and adjust to the plant's response.`;
+  return `Light score: ${value}/10. Use this as a starting point and adjust to the plant's response.`;
 }
 
 function formatTrefleHumidity(value: number | null | undefined) {
   if (typeof value !== "number") return null;
-  return `Trefle humidity score: ${value}/10. Keep airflow steady and avoid letting leaves stay wet.`;
+  return `Humidity score: ${value}/10. Keep airflow steady and avoid letting leaves stay wet.`;
 }
 
 function formatTrefleSoil(value: number | null | undefined) {
   if (typeof value !== "number") return null;
-  return `Trefle soil texture score: ${value}/10. Use a loose, well-draining mix unless the species requires otherwise.`;
+  return `Soil texture score: ${value}/10. Use a loose, well-draining mix unless the species requires otherwise.`;
+}
+
+function toDisplayText(value: unknown) {
+  if (typeof value === "string") return cleanCareText(value);
+  if (!value || typeof value !== "object") return null;
+
+  const candidate = value as {
+    name?: unknown;
+    scientific_name?: unknown;
+    common_name?: unknown;
+  };
+
+  return cleanCareText(
+    typeof candidate.name === "string"
+      ? candidate.name
+      : typeof candidate.scientific_name === "string"
+        ? candidate.scientific_name
+        : typeof candidate.common_name === "string"
+          ? candidate.common_name
+          : null,
+  );
 }
 
 function profileFromTreflePlant(plant: TreflePlant, scientificName: string, commonNames: string[], category: string): CareProfile {
   const mainSpecies = plant.main_species;
-  const family = plant.family_common_name ?? plant.family ?? null;
-  const genus = plant.genus ?? null;
+  const family = toDisplayText(plant.family_common_name) ?? toDisplayText(plant.family);
+  const genus = toDisplayText(plant.genus);
   const details = [
     family ? `Family: ${family}` : null,
     genus ? `Genus: ${genus}` : null,
@@ -396,7 +417,7 @@ function profileFromTreflePlant(plant: TreflePlant, scientificName: string, comm
     perenualId: null,
     scientificName: plant.scientific_name ?? scientificName,
     commonName: plant.common_name ?? commonNames[0] ?? null,
-    summary: details.length > 0 || careHints.length > 0 ? `Trefle plant database match. ${[...details, careHints.length > 0 ? `Care signals available for ${careHints.join(", ")}.` : null].filter(Boolean).join(" ")}` : null,
+    summary: details.length > 0 || careHints.length > 0 ? `Leafy AI care match. ${[...details, careHints.length > 0 ? `Care signals available for ${careHints.join(", ")}.` : null].filter(Boolean).join(" ")}` : null,
     watering: formatTrefleHumidity(mainSpecies?.growth?.atmospheric_humidity),
     sunlight: formatTrefleLight(mainSpecies?.growth?.light),
     soil: formatTrefleSoil(mainSpecies?.growth?.soil_texture),
@@ -871,8 +892,15 @@ Deno.serve(async (request) => {
     };
   });
 
+  const publicCareProfile = careProfile
+    ? {
+        ...careProfile,
+        provider: "Leafy AI",
+      }
+    : null;
+
   return jsonResponse({
-    provider: "PlantNet",
+    provider: "Leafy AI",
     bestMatch: commonNames[0] ?? scientificName,
     scientificName,
     commonNames,
@@ -880,7 +908,7 @@ Deno.serve(async (request) => {
     genus: best.species.genus?.scientificNameWithoutAuthor ?? null,
     confidence,
     category,
-    careProfile,
+    careProfile: publicCareProfile,
     saleStatus: decision.saleStatus,
     reviewReason: decision.reviewReason,
     alternativeMatches,

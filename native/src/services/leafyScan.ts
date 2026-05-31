@@ -2,7 +2,7 @@ import { supabase } from "./supabase";
 import type { PickedImage } from "./storage";
 
 export type PlantCareProfile = {
-  provider: "Perenual" | "Trefle" | "GrowMate";
+  provider: string;
   perenualId: number | null;
   scientificName: string;
   commonName: string | null;

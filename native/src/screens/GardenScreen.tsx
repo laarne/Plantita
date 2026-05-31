@@ -1143,7 +1143,7 @@ export function GardenScreen({ onOpenChat, onOpenListingDetail }: GardenScreenPr
 
                     <View style={styles.scannerResultRow}>
                       <Text style={styles.scannerResultLabel}>Source</Text>
-                      <Text style={styles.scannerResultVal}>{scannerResult.provider}</Text>
+                      <Text style={styles.scannerResultVal}>Leafy AI</Text>
                     </View>
 
                     <View style={styles.scannerResultNote}>
@@ -1156,7 +1156,7 @@ export function GardenScreen({ onOpenChat, onOpenListingDetail }: GardenScreenPr
                         <View style={styles.careGuideHeader}>
                           <MaterialCommunityIcons name="sprout-outline" size={18} color={colors.green} />
                           <Text style={styles.careGuideTitle}>
-                            Care guide from {scannerResult.careProfile.provider}
+                            Care guide from Leafy AI
                           </Text>
                         </View>
                         {scannerResult.careProfile.summary && (
@@ -1180,7 +1180,7 @@ export function GardenScreen({ onOpenChat, onOpenListingDetail }: GardenScreenPr
 
                     {typeof scannerResult.remainingRequests === "number" && (
                       <View style={styles.scannerResultRow}>
-                        <Text style={styles.scannerResultLabel}>PlantNet Requests Left</Text>
+                        <Text style={styles.scannerResultLabel}>Leafy AI Requests Left</Text>
                         <Text style={styles.scannerResultVal}>{scannerResult.remainingRequests}</Text>
                       </View>
                     )}
