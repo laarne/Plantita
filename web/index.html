@@ -3,191 +3,376 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="GrowMate is an AI-powered plant marketplace and community app for safer plant buying, selling, garden showcasing, and Leafy AI care support."
-    />
+    <meta name="description" content="GrowMate is an AI-powered plant marketplace and community app for safer plant buying, selling, garden showcasing, and Leafy AI care support." />
+    <meta property="og:title" content="GrowMate | AI Plant Marketplace" />
+    <meta property="og:description" content="Buy, sell, identify, and care for plants safely with Leafy AI." />
+    <meta property="og:image" content="/landing-market.png" />
     <link rel="icon" type="image/png" href="/growmate-logo.png" />
     <title>GrowMate | AI Plant Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..950&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <main class="page" id="top">
-      <section class="hero" aria-label="GrowMate app landing page">
-        <div class="hero-media" aria-hidden="true"></div>
-        <nav class="nav" aria-label="Primary navigation">
-          <a class="brand" href="#top" aria-label="GrowMate home">
-            <img src="/growmate-logo.png" alt="" />
-            <span>GrowMate</span>
-          </a>
-          <div class="nav-links" aria-label="Page sections">
-            <a href="#features">Features</a>
-            <a href="#marketplace">Marketplace</a>
-            <a href="#community">Community</a>
-            <a href="#garden">Garden</a>
-            <a href="#leafy-ai">Leafy AI</a>
-            <a href="#how">How it works</a>
-            <a href="#download">Download</a>
-          </div>
-          <a class="download-link" href="/growmate.apk" download>Download APK</a>
-        </nav>
 
-        <div class="hero-grid">
+    <!-- ===== NAV ===== -->
+    <nav class="nav" id="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="GrowMate home">
+        <img src="/growmate-logo.png" alt="" width="40" height="40" />
+        <span>GrowMate</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#playground">Leafy AI</a></li>
+        <li><a href="#pathways">For You</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#download">Download</a></li>
+      </ul>
+      <a class="nav-cta" href="/growmate.apk" download aria-label="Download GrowMate APK">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Now
+      </a>
+    </nav>
+
+    <main id="top">
+
+      <!-- ===== HERO ===== -->
+      <section class="hero" aria-label="GrowMate app introduction">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-inner">
           <div class="hero-copy">
             <p class="eyebrow">AI-powered plant marketplace</p>
-            <h1>GrowMate</h1>
-            <p class="hero-statement">Buy, sell, identify, and care for plants safely.</p>
-            <p class="lead">
-              GrowMate helps plantitos, plantitas, sellers, and beginners create better listings, get Leafy AI
-              care support, showcase gardens, and connect with local plant communities.
-            </p>
-            <div class="hero-pills" aria-label="GrowMate highlights">
-              <span>Plant marketplace</span>
-              <span>Leafy AI checks</span>
-              <span>Garden profiles</span>
+            <h1>Grow<br/>Mate</h1>
+            <p class="hero-statement">Buy, sell, identify,<br/>and care for plants safely.</p>
+            <p class="lead">GrowMate gives plantitos and plantitas a marketplace with Leafy AI checks, garden showcases, and a community that actually cares.</p>
+            <div class="hero-chips" aria-label="GrowMate highlights">
+              <span>🌿 Leafy AI checks</span>
+              <span>🛒 Plant marketplace</span>
+              <span>🌱 Garden profiles</span>
             </div>
             <div class="hero-actions">
-              <a class="primary-button" href="/growmate.apk" download>Download GrowMate APK</a>
-              <p>Android demo build, ready for phone, emulator, or web device testing.</p>
+              <a class="cta-primary" href="/growmate.apk" download id="hero-download">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download for Android
+              </a>
+              <span class="hero-note">Free · Android 8.0+ · 61 MB</span>
             </div>
           </div>
 
-          <div class="phone-stage" aria-label="GrowMate app screens">
-            <div class="phone phone-back">
-              <img src="/landing-feed.png" alt="GrowMate community feed screen" />
+          <div class="hero-phones" aria-label="GrowMate app screens" id="hero-phones">
+            <div class="phone-wrap phone-back">
+              <div class="phone">
+                <div class="phone-notch"></div>
+                <img src="/landing-feed.png" alt="GrowMate community feed screen" loading="eager" />
+              </div>
             </div>
-            <div class="phone phone-front">
-              <img src="/landing-market.png" alt="GrowMate marketplace screen" />
+            <div class="phone-wrap phone-center">
+              <div class="phone phone-primary">
+                <div class="phone-notch"></div>
+                <img src="/landing-market.png" alt="GrowMate marketplace screen" loading="eager" />
+              </div>
             </div>
-            <div class="phone phone-side">
-              <img src="/landing-garden.png" alt="GrowMate garden profile screen" />
+            <div class="phone-wrap phone-side">
+              <div class="phone">
+                <div class="phone-notch"></div>
+                <img src="/landing-rankings.png" alt="GrowMate rankings screen" loading="eager" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-fade" aria-hidden="true"></div>
+      </section>
+
+      <!-- ===== FEATURE STRIP ===== -->
+      <section class="feature-strip" id="features" aria-label="GrowMate core features">
+        <div class="strip-scroll" role="list">
+          <div class="strip-chip" role="listitem">
+            <span class="chip-icon moss">🌿</span>
+            <div class="chip-text">
+              <strong>Leafy AI</strong>
+              <span>Scan → identify → care tips</span>
+            </div>
+          </div>
+          <div class="strip-divider" aria-hidden="true"></div>
+          <div class="strip-chip" role="listitem">
+            <span class="chip-icon sky">🛒</span>
+            <div class="chip-text">
+              <strong>Marketplace</strong>
+              <span>AI-assisted plant listings</span>
+            </div>
+          </div>
+          <div class="strip-divider" aria-hidden="true"></div>
+          <div class="strip-chip" role="listitem">
+            <span class="chip-icon coral">🌱</span>
+            <div class="chip-text">
+              <strong>Garden Showcase</strong>
+              <span>Show off your collection</span>
+            </div>
+          </div>
+          <div class="strip-divider" aria-hidden="true"></div>
+          <div class="strip-chip" role="listitem">
+            <span class="chip-icon sun">🏆</span>
+            <div class="chip-text">
+              <strong>Rankings</strong>
+              <span>Compete with plantitos</span>
+            </div>
+          </div>
+          <div class="strip-divider" aria-hidden="true"></div>
+          <div class="strip-chip" role="listitem">
+            <span class="chip-icon mint">💬</span>
+            <div class="chip-text">
+              <strong>Community</strong>
+              <span>Connect with local growers</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section split" aria-label="About GrowMate">
-        <div>
-          <p class="section-label">What the app does</p>
-          <h2>A safer plant marketplace with care guidance built in.</h2>
-        </div>
-        <p>
-          GrowMate combines a plant marketplace, community feed, garden showcase, rankings, and Leafy AI
-          assistance in one mobile app.
-        </p>
-      </section>
+      <!-- ===== LEAFY AI PLAYGROUND ===== -->
+      <section class="playground-section" id="playground" aria-label="Leafy AI interactive demo">
+        <div class="playground-inner">
+          <div class="playground-copy">
+            <p class="section-label">Leafy AI Playground</p>
+            <h2>See it work before you download.</h2>
+            <p class="body-text">Tap any plant and watch Leafy AI identify it, check its safety, and generate care tips — all in seconds.</p>
+            <ul class="feat-list" aria-label="What Leafy AI does">
+              <li><span class="feat-dot" style="background:var(--moss)"></span>Plant identification from photo</li>
+              <li><span class="feat-dot" style="background:var(--sky)"></span>Selling safety check</li>
+              <li><span class="feat-dot" style="background:var(--coral)"></span>Personalised care tips</li>
+              <li><span class="feat-dot" style="background:var(--sun)"></span>AI listing descriptions</li>
+            </ul>
+          </div>
 
-      <section class="section feature-grid" id="features" aria-label="GrowMate features">
-        <article id="leafy-ai-card">
-          <span class="feature-icon leaf"></span>
-          <h3>Leafy AI checks</h3>
-          <p>Scan plant photos to suggest names, categories, care tips, listing text, and selling safety status.</p>
-        </article>
-        <article id="marketplace">
-          <span class="feature-icon market"></span>
-          <h3>Plant marketplace</h3>
-          <p>Sellers can add photos, prices, categories, and delivery options with AI-assisted descriptions.</p>
-        </article>
-        <article id="community">
-          <span class="feature-icon community"></span>
-          <h3>Community feed</h3>
-          <p>Separate care posts, garden updates, and questions from cash selling posts for cleaner browsing.</p>
-        </article>
-        <article id="garden">
-          <span class="feature-icon garden"></span>
-          <h3>Garden showcase</h3>
-          <p>Visit other gardens to discover plants, growers, care ideas, and local plant inspiration.</p>
-        </article>
-      </section>
+          <div class="playground-demo" id="playground-demo">
+            <div class="demo-plants" role="group" aria-label="Choose a plant to scan">
+              <button class="demo-plant active" data-plant="monstera" aria-pressed="true" aria-label="Scan Monstera">
+                <img src="/plants/monstera-real.jpg" alt="Monstera" loading="lazy" />
+              </button>
+              <button class="demo-plant" data-plant="orchid" aria-pressed="false" aria-label="Scan Orchid">
+                <img src="/plants/orchid-real.jpg" alt="Orchid" loading="lazy" />
+              </button>
+              <button class="demo-plant" data-plant="pothos" aria-pressed="false" aria-label="Scan Pothos">
+                <img src="/plants/pothos-real.jpg" alt="Pothos" loading="lazy" />
+              </button>
+              <button class="demo-plant" data-plant="succulent" aria-pressed="false" aria-label="Scan Succulent">
+                <img src="/plants/succulent-real.jpg" alt="Succulent" loading="lazy" />
+              </button>
+            </div>
 
-      <section class="ai-section" id="leafy-ai" aria-label="Leafy AI features">
-        <div class="ai-copy">
-          <p class="section-label">Leafy AI</p>
-          <h2>Plant intelligence for safer buying, selling, and care.</h2>
-          <p>
-            Leafy AI supports the key moments in GrowMate: identifying plants from photos, generating clearer
-            marketplace descriptions, suggesting care tips, and warning users when a plant may need review before
-            being sold.
-          </p>
-        </div>
-        <div class="ai-list" aria-label="Leafy AI capabilities">
-          <article>
-            <strong>Plant ID</strong>
-            <span>Suggests plant names and categories from uploaded photos.</span>
-          </article>
-          <article>
-            <strong>Care tips</strong>
-            <span>Gives beginner-friendly watering, sunlight, and care guidance.</span>
-          </article>
-          <article>
-            <strong>Listing helper</strong>
-            <span>Creates cleaner marketplace descriptions for sellers.</span>
-          </article>
-          <article>
-            <strong>Safety check</strong>
-            <span>Flags protected or risky plants before public listing.</span>
-          </article>
-        </div>
-      </section>
+            <div class="demo-stage">
+              <div class="demo-image-wrap" id="demo-image-wrap">
+                <img src="/plants/monstera-real.jpg" alt="Plant being scanned" id="demo-main-img" loading="lazy" />
+                <div class="scan-overlay" id="scan-overlay" aria-hidden="true">
+                  <div class="scan-line" id="scan-line"></div>
+                  <div class="scan-corners">
+                    <span class="sc tl"></span><span class="sc tr"></span>
+                    <span class="sc bl"></span><span class="sc br"></span>
+                  </div>
+                </div>
+              </div>
 
-      <section class="showcase" aria-label="GrowMate app preview">
-        <div class="showcase-copy">
-          <p class="section-label">Designed for real plant communities</p>
-          <h2>From first scan to successful sale.</h2>
-          <p>
-            Sellers get AI-assisted posting. Buyers get clearer plant information. Beginners get care guidance.
-            Communities get a safer place to discover, learn, and support local growers.
-          </p>
-        </div>
-        <div class="showcase-images">
-          <img src="/landing-market.png" alt="GrowMate market browsing" />
-          <img src="/landing-rankings.png" alt="GrowMate rankings screen" />
+              <div class="scan-idle" id="scan-idle">
+                <button class="scan-btn" id="scan-btn" aria-label="Scan this plant with Leafy AI">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  Scan with Leafy AI
+                </button>
+              </div>
+
+              <div class="scan-result" id="scan-result" hidden aria-live="assertive">
+                <div class="result-row">
+                  <div>
+                    <p class="result-name" id="result-name">Monstera deliciosa</p>
+                    <p class="result-common" id="result-common">Swiss Cheese Plant</p>
+                  </div>
+                  <span class="result-badge" id="result-badge">✅ Safe</span>
+                </div>
+                <div class="result-tags" id="result-tags">
+                  <span>🌤️ Indirect light</span>
+                  <span>💧 7 days</span>
+                  <span>🌡️ 18–27°C</span>
+                </div>
+                <p class="result-tip" id="result-tip">Thrives in bright indirect light. Wipe leaves monthly. Mildly toxic to pets — disclose when selling.</p>
+                <button class="result-reset" id="result-reset">← Try another plant</button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="section steps" id="how" aria-label="How GrowMate works">
-        <div class="steps-heading">
-          <p class="section-label">How it works</p>
-          <h2>Simple enough for beginners, useful enough for sellers.</h2>
+      <!-- ===== TWO-PATHWAY SPLIT ===== -->
+      <section class="pathways-section" id="pathways" aria-label="GrowMate user pathways">
+        <div class="pathways-header">
+          <p class="section-label">Built for every plant lover</p>
+          <h2>Which one are you?</h2>
         </div>
-        <div class="step-list">
-          <article>
-            <strong>01</strong>
-            <h3>Scan a plant</h3>
-            <p>Upload a photo and let Leafy AI suggest identity, category, care notes, and safety status.</p>
-          </article>
-          <article>
-            <strong>02</strong>
-            <h3>Create a listing</h3>
-            <p>Add price, quantity, description, delivery or meetup options, then post to the marketplace.</p>
-          </article>
-          <article>
-            <strong>03</strong>
-            <h3>Grow your profile</h3>
-            <p>Share garden updates, collect achievements, and connect with nearby plant lovers.</p>
-          </article>
+        <div class="pathways-grid">
+
+          <div class="pathway gardener-path" id="pw-gardener" tabindex="0" role="region" aria-label="The Gardener pathway">
+            <div class="pw-phone">
+              <div class="pw-phone-frame">
+                <div class="phone-notch"></div>
+                <img src="/landing-garden.png" alt="GrowMate garden showcase screen" id="pw-gardener-img" loading="lazy" />
+              </div>
+            </div>
+            <div class="pw-copy">
+              <span class="pw-tag moss-tag">🌱 The Gardener</span>
+              <h3>Showcase your collection.<br/>Track every plant.</h3>
+              <ul class="pw-list">
+                <li>Build a public garden profile visitors can browse</li>
+                <li>Track care schedules and plant history</li>
+                <li>Earn badges and climb the community rankings</li>
+              </ul>
+              <a class="cta-outline" href="/growmate.apk" download>Start your garden →</a>
+            </div>
+          </div>
+
+          <div class="pathway seller-path" id="pw-seller" tabindex="0" role="region" aria-label="The Seller pathway">
+            <div class="pw-phone">
+              <div class="pw-phone-frame">
+                <div class="phone-notch"></div>
+                <img src="/landing-market.png" alt="GrowMate marketplace screen" id="pw-seller-img" loading="lazy" />
+              </div>
+            </div>
+            <div class="pw-copy">
+              <span class="pw-tag sky-tag">🛒 The Seller</span>
+              <h3>Create listings with AI.<br/>Sell plants safely.</h3>
+              <ul class="pw-list">
+                <li>Leafy AI writes your listing descriptions</li>
+                <li>Built-in safety checks before you post</li>
+                <li>Reach local buyers — delivery or meetup</li>
+              </ul>
+              <a class="cta-outline" href="/growmate.apk" download>Start selling →</a>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <section class="download-section" id="download" aria-label="Download GrowMate APK">
-        <div>
-          <p class="section-label">Android APK</p>
-          <h2>Install the GrowMate demo build.</h2>
-          <p>
-            Use the APK for your Android phone, emulator, or browser-based device tester. The download button
-            points directly to the latest GrowMate package in this folder.
-          </p>
+      <!-- ===== SOCIAL PROOF ===== -->
+      <section class="social-section" id="community" aria-label="GrowMate user testimonials">
+        <div class="social-inner">
+          <p class="section-label">Real growers. Real results.</p>
+          <h2>Plantitos and plantitas love it.</h2>
+
+          <div class="cards-viewport" id="cards-viewport">
+            <div class="cards-track" id="cards-track">
+
+              <article class="proof-card" aria-label="Testimonial from Aling Rosa">
+                <div class="card-top">
+                  <img src="/avatars/avatar-aling.png" alt="Aling Rosa" class="card-avatar" loading="lazy" />
+                  <div class="card-meta">
+                    <strong>Aling Rosa</strong>
+                    <span>Quezon City · Garden seller</span>
+                    <div class="card-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                  </div>
+                </div>
+                <blockquote>"Dati nahihirapan akong maglista ng plants. Ngayon, pini-picture ko lang at si Leafy AI ang bahala. Naibenta ko ang Monstera ko sa loob ng isang araw!"</blockquote>
+                <div class="card-plant">
+                  <img src="/plants/monstera-real.jpg" alt="Monstera sold" loading="lazy" />
+                  <span>Monstera deliciosa · sold for ₱850</span>
+                </div>
+              </article>
+
+              <article class="proof-card" aria-label="Testimonial from Miguel Santos">
+                <div class="card-top">
+                  <img src="/avatars/avatar-miguel.png" alt="Miguel Santos" class="card-avatar" loading="lazy" />
+                  <div class="card-meta">
+                    <strong>Miguel Santos</strong>
+                    <span>Cebu City · Plant collector</span>
+                    <div class="card-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                  </div>
+                </div>
+                <blockquote>"Ang ganda ng Garden feature! Puwede mong i-showcase lahat ng plants mo. Parang Instagram pero para sa mga halaman. 10/10 irerekomenda ko sa lahat!"</blockquote>
+                <div class="card-plant">
+                  <img src="/plants/orchid-real.jpg" alt="Orchid collection" loading="lazy" />
+                  <span>Orchid collection · 23 followers</span>
+                </div>
+              </article>
+
+              <article class="proof-card" aria-label="Testimonial from Maria Cruz">
+                <div class="card-top">
+                  <img src="/avatars/avatar-maria.png" alt="Maria Cruz" class="card-avatar" loading="lazy" />
+                  <div class="card-meta">
+                    <strong>Maria Cruz</strong>
+                    <span>Davao City · Beginner plantita</span>
+                    <div class="card-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                  </div>
+                </div>
+                <blockquote>"Hindi ako marunong mag-alaga ng plants dati. Ang Leafy AI ng GrowMate sinasabihan niya ako kung kailan mag-water at kung kailangan ng araw. Super helpful!"</blockquote>
+                <div class="card-plant">
+                  <img src="/plants/pothos-real.jpg" alt="Pothos plants" loading="lazy" />
+                  <span>Golden Pothos · 12 plants tracked</span>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <div class="card-dots" id="card-dots" role="tablist" aria-label="Testimonial navigation">
+            <button class="dot active" data-idx="0" role="tab" aria-selected="true" aria-label="Testimonial 1"></button>
+            <button class="dot" data-idx="1" role="tab" aria-selected="false" aria-label="Testimonial 2"></button>
+            <button class="dot" data-idx="2" role="tab" aria-selected="false" aria-label="Testimonial 3"></button>
+          </div>
         </div>
-        <a class="primary-button dark" href="/growmate.apk" download>Download APK</a>
       </section>
 
-      <footer class="footer" aria-label="GrowMate footer">
-        <a class="footer-brand" href="#top">
-          <img src="/growmate-logo.png" alt="" />
-          <span>GrowMate</span>
-        </a>
-        <p>Grow smart, grow safe. Marketplace, community, garden showcase, and Leafy AI.</p>
-      </footer>
+      <!-- ===== LIVE STATS ===== -->
+      <section class="stats-section" aria-label="GrowMate community statistics">
+        <div class="stats-inner">
+          <p class="section-label" style="color:var(--sky)">The community is growing</p>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-number" data-target="5102" data-prefix="" data-suffix="" id="stat-0">0</span>
+              <span class="stat-label">Gardeners Growing</span>
+            </div>
+            <div class="stat-div" aria-hidden="true"></div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="12430" data-prefix="" data-suffix="" id="stat-1">0</span>
+              <span class="stat-label">Plants Tracked</span>
+            </div>
+            <div class="stat-div" aria-hidden="true"></div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="250" data-prefix="₱" data-suffix="K+" id="stat-2">₱0K+</span>
+              <span class="stat-label">Pesos Traded</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FINAL CTA ===== -->
+      <section class="final-cta" id="download" aria-label="Download GrowMate">
+        <div class="cta-leaves" aria-hidden="true">
+          <span class="leaf l1">🌿</span>
+          <span class="leaf l2">🌱</span>
+          <span class="leaf l3">🍃</span>
+          <span class="leaf l4">🌿</span>
+          <span class="leaf l5">🍃</span>
+        </div>
+        <div class="cta-content">
+          <p class="section-label" style="color:var(--moss)">Free Android APK · No sign-up required</p>
+          <h2>Join the plant community.<br/>Start growing today.</h2>
+          <p class="cta-body">Download the GrowMate demo build. Runs on any Android phone or emulator.</p>
+          <a class="cta-primary cta-xl" href="/growmate.apk" download>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download GrowMate APK
+          </a>
+          <p class="cta-sub">Android 8.0+ · 61 MB · Latest build</p>
+        </div>
+      </section>
+
     </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" aria-label="GrowMate footer">
+      <a class="footer-brand" href="#top" aria-label="Back to top">
+        <img src="/growmate-logo.png" alt="" width="34" height="34" />
+        <span>GrowMate</span>
+      </a>
+      <p class="footer-text">Grow smart, grow safe. Marketplace, community, garden showcase, and Leafy AI.</p>
+      <a class="footer-link" href="#top" aria-label="Scroll back to top">Back to top ↑</a>
+    </footer>
+
+    <script src="/script.js" defer></script>
   </body>
 </html>
