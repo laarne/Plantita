@@ -235,12 +235,12 @@ function hasUsableCare(profile: CareProfile | null) {
 function hasActionableCare(profile: CareProfile | null) {
   if (!profile) return false;
   return Boolean(
-    profile.summary ||
-      profile.watering ||
+    profile.watering ||
       profile.sunlight ||
       profile.soil ||
       profile.pruning ||
-      profile.propagation,
+      profile.propagation ||
+      profile.toxicity,
   );
 }
 
