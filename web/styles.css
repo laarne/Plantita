@@ -230,10 +230,9 @@ h3 {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(30, 80, 50, 0.5) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 80% at 90% 20%, rgba(191, 234, 85, 0.06) 0%, transparent 60%),
-    url('/landing-garden.png') center right / cover no-repeat;
-  filter: saturate(0.6) brightness(0.35);
+    linear-gradient(135deg, rgba(13, 26, 18, 0.97) 0%, rgba(22, 39, 31, 0.88) 50%, rgba(13, 26, 18, 0.82) 100%),
+    url('/plants/monstera-real.jpg') center center / cover no-repeat;
+  filter: saturate(0.75) brightness(1);
   transform: scale(1.04);
 }
 
