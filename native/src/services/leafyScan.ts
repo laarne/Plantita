@@ -16,7 +16,7 @@ export type PlantCareProfile = {
   growthHabit: string | null;
   toxicity: string | null;
   imageUrl: string | null;
-  source: "cache" | "perenual" | "fallback";
+  source: "cache" | "perenual" | "trefle" | "fallback";
 };
 
 export type LeafyScanResult = {

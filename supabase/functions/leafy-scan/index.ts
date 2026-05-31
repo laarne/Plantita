@@ -219,6 +219,18 @@ function hasUsableCare(profile: CareProfile | null) {
   );
 }
 
+function hasActionableCare(profile: CareProfile | null) {
+  if (!profile) return false;
+  return Boolean(
+    profile.summary ||
+      profile.watering ||
+      profile.sunlight ||
+      profile.soil ||
+      profile.pruning ||
+      profile.propagation,
+  );
+}
+
 function sanitizeCareProfile(profile: CareProfile): CareProfile | null {
   const cleaned = {
     ...profile,
@@ -373,13 +385,18 @@ function profileFromTreflePlant(plant: TreflePlant, scientificName: string, comm
     genus ? `Genus: ${genus}` : null,
     mainSpecies?.edible || mainSpecies?.vegetable ? "May have edible or vegetable use; confirm safety before consuming." : null,
   ].filter(Boolean);
+  const careHints = [
+    typeof mainSpecies?.growth?.atmospheric_humidity === "number" ? "humidity" : null,
+    typeof mainSpecies?.growth?.light === "number" ? "light" : null,
+    typeof mainSpecies?.growth?.soil_texture === "number" ? "soil texture" : null,
+  ].filter(Boolean);
 
   return {
     provider: "Trefle",
     perenualId: null,
     scientificName: plant.scientific_name ?? scientificName,
     commonName: plant.common_name ?? commonNames[0] ?? null,
-    summary: details.length > 0 ? `Trefle plant database match. ${details.join(" ")}` : "Trefle plant database match.",
+    summary: details.length > 0 || careHints.length > 0 ? `Trefle plant database match. ${[...details, careHints.length > 0 ? `Care signals available for ${careHints.join(", ")}.` : null].filter(Boolean).join(" ")}` : null,
     watering: formatTrefleHumidity(mainSpecies?.growth?.atmospheric_humidity),
     sunlight: formatTrefleLight(mainSpecies?.growth?.light),
     soil: formatTrefleSoil(mainSpecies?.growth?.soil_texture),
@@ -416,7 +433,7 @@ async function fetchPerenualCareProfile(scientificName: string, commonNames: str
   if (!species?.id) return null;
 
   const listProfile = profileFromPerenualSpecies(species, scientificName, commonNames, category);
-  if (hasUsableCare(listProfile)) {
+  if (hasActionableCare(listProfile)) {
     return listProfile;
   }
 
@@ -486,7 +503,7 @@ async function loadCachedCareProfile(client: ReturnType<typeof createClient>, no
 
   if (!careCacheError && careCache) {
     console.log(`Plant care source: Supabase cache (${normalizedScientificName})`);
-    return sanitizeCareProfile({
+    const cachedProfile = sanitizeCareProfile({
       provider: normalizeCareProvider(careCache.provider),
       perenualId: careCache.perenual_id,
       scientificName: careCache.scientific_name,
@@ -503,6 +520,9 @@ async function loadCachedCareProfile(client: ReturnType<typeof createClient>, no
       imageUrl: careCache.image_url,
       source: "cache",
     });
+
+    if (hasActionableCare(cachedProfile)) return cachedProfile;
+    console.log(`Plant care cache too sparse; refreshing (${normalizedScientificName})`);
   }
 
   const { data: legacyProfile, error: legacyError } = await client
@@ -515,7 +535,7 @@ async function loadCachedCareProfile(client: ReturnType<typeof createClient>, no
 
   console.log(`Plant care source: legacy Supabase cache (${normalizedScientificName})`);
 
-  return sanitizeCareProfile({
+  const cachedLegacyProfile = sanitizeCareProfile({
     provider: normalizeCareProvider(legacyProfile.provider),
     perenualId: null,
     scientificName: legacyProfile.scientific_name,
@@ -532,6 +552,10 @@ async function loadCachedCareProfile(client: ReturnType<typeof createClient>, no
     imageUrl: legacyProfile.image_url,
     source: "cache",
   });
+
+  if (hasActionableCare(cachedLegacyProfile)) return cachedLegacyProfile;
+  console.log(`Legacy plant care cache too sparse; refreshing (${normalizedScientificName})`);
+  return null;
 }
 
 async function saveCareProfile(client: ReturnType<typeof createClient> | null, normalizedScientificName: string, profile: CareProfile) {
@@ -611,7 +635,7 @@ async function getCareProfileWithCache(
     if (perenualApiKey && allowPerenualLookup) {
       try {
         const perenualProfile = await fetchPerenualCareProfile(scientificName, commonNames, category, perenualApiKey);
-        profile = hasUsableCare(perenualProfile) ? perenualProfile : null;
+        profile = hasActionableCare(perenualProfile) ? perenualProfile : null;
         if (profile) {
           console.log(`Plant care source: Perenual API (${normalizedScientificName})`);
         }
@@ -624,7 +648,7 @@ async function getCareProfileWithCache(
       if (trefleToken) {
         try {
           const trefleProfile = await fetchTrefleCareProfile(scientificName, commonNames, category, trefleToken);
-          profile = hasUsableCare(trefleProfile) ? trefleProfile : null;
+          profile = hasActionableCare(trefleProfile) ? trefleProfile : null;
           if (profile) {
             console.log(`Plant care source: Trefle API (${normalizedScientificName})`);
           }
