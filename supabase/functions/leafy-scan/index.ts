@@ -529,6 +529,37 @@ async function fetchTrefleCareProfile(scientificName: string, commonNames: strin
 }
 
 async function loadCachedCareProfile(client: ReturnType<typeof createClient>, normalizedScientificName: string): Promise<CareProfile | null> {
+  const { data: legacyProfile, error: legacyError } = await client
+    .from("plant_care_profiles")
+    .select("provider, scientific_name, common_name, summary, watering, sunlight, soil, pruning, propagation, cycle, growth_habit, toxicity, image_url")
+    .eq("normalized_scientific_name", normalizedScientificName)
+    .maybeSingle();
+
+  if (!legacyError && legacyProfile) {
+    console.log(`Plant care source: rich Supabase cache (${normalizedScientificName})`);
+
+    const cachedLegacyProfile = sanitizeCareProfile({
+      provider: normalizeCareProvider(legacyProfile.provider),
+      perenualId: null,
+      scientificName: legacyProfile.scientific_name,
+      commonName: legacyProfile.common_name,
+      summary: legacyProfile.summary,
+      watering: legacyProfile.watering,
+      sunlight: legacyProfile.sunlight,
+      soil: legacyProfile.soil,
+      pruning: legacyProfile.pruning,
+      propagation: legacyProfile.propagation,
+      cycle: legacyProfile.cycle,
+      growthHabit: legacyProfile.growth_habit,
+      toxicity: legacyProfile.toxicity,
+      imageUrl: legacyProfile.image_url,
+      source: "cache",
+    });
+
+    if (hasActionableCare(cachedLegacyProfile)) return cachedLegacyProfile;
+    console.log(`Rich plant care cache too sparse; checking compact cache (${normalizedScientificName})`);
+  }
+
   const { data: careCache, error: careCacheError } = await client
     .from("plant_care_cache")
     .select("provider, perenual_id, scientific_name, common_name, description, watering, sunlight, soil, fertilizer, pruning, humidity, care_level, image_url")
@@ -559,36 +590,6 @@ async function loadCachedCareProfile(client: ReturnType<typeof createClient>, no
     console.log(`Plant care cache too sparse; refreshing (${normalizedScientificName})`);
   }
 
-  const { data: legacyProfile, error: legacyError } = await client
-    .from("plant_care_profiles")
-    .select("provider, scientific_name, common_name, summary, watering, sunlight, soil, pruning, propagation, cycle, growth_habit, toxicity, image_url")
-    .eq("normalized_scientific_name", normalizedScientificName)
-    .maybeSingle();
-
-  if (legacyError || !legacyProfile) return null;
-
-  console.log(`Plant care source: legacy Supabase cache (${normalizedScientificName})`);
-
-  const cachedLegacyProfile = sanitizeCareProfile({
-    provider: normalizeCareProvider(legacyProfile.provider),
-    perenualId: null,
-    scientificName: legacyProfile.scientific_name,
-    commonName: legacyProfile.common_name,
-    summary: legacyProfile.summary,
-    watering: legacyProfile.watering,
-    sunlight: legacyProfile.sunlight,
-    soil: legacyProfile.soil,
-    pruning: legacyProfile.pruning,
-    propagation: legacyProfile.propagation,
-    cycle: legacyProfile.cycle,
-    growthHabit: legacyProfile.growth_habit,
-    toxicity: legacyProfile.toxicity,
-    imageUrl: legacyProfile.image_url,
-    source: "cache",
-  });
-
-  if (hasActionableCare(cachedLegacyProfile)) return cachedLegacyProfile;
-  console.log(`Legacy plant care cache too sparse; refreshing (${normalizedScientificName})`);
   return null;
 }
 
