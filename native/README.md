@@ -1,22 +1,27 @@
-# GrowMate Native
+# GrowMate
 
-This is now the main production app for GrowMate. The old web prototype has been removed so development can focus on React Native, Supabase, verified sellers, and mobile-first buyer flows.
+GrowMate is now focused on the production React Native mobile app.
 
-## Stack
+## Active Project Areas
 
-- Expo React Native
-- TypeScript
-- Supabase Auth, Database, and Storage
-- Plant scanning through a secure backend or Supabase Edge Function
+- `native/` - Expo React Native app
+- `supabase/` - database schema, RLS policies, and storage setup
 
-## Migration Order
+## Removed From Active Development
 
-1. Supabase project connection and session handling
-2. Buyer-first Market
-3. Seller verification and Seller Dashboard
-4. Leafy AI scan flow using native camera/image picker
-5. Listings, orders, and buyer messages
-6. Feed, Garden, Rankings, and Profile
+The old Vite web prototype, Netlify landing page, and Capacitor web APK wrapper were removed so the project can focus on the real mobile app.
+
+## Commands
+
+Run these from the repository root:
+
+```bash
+npm start
+npm run android
+npm run typecheck
+```
+
+The root scripts delegate to the Expo app inside `native/`.
 
 ## Environment
 
@@ -24,15 +29,9 @@ Create `native/.env.local`:
 
 ```env
 EXPO_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
-EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_publishable_or_anon_key
 ```
 
-Keep private API secrets such as plant-identification keys on the backend only.
+Private API keys must stay on a backend or Supabase Edge Function, not inside the mobile app.
 
-## Commands
-
-```bash
-npm start
-npm run android
-npm run web
-```
+For EAS preview/production builds, define the same public Expo variables in EAS environment variables instead of hardcoding them in `eas.json`.

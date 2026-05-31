@@ -66,8 +66,40 @@ type PerenualCareGuideResponse = {
   }[];
 };
 
+type TreflePlant = {
+  id?: number;
+  slug?: string | null;
+  common_name?: string | null;
+  scientific_name?: string | null;
+  family_common_name?: string | null;
+  family?: string | null;
+  genus?: string | null;
+  image_url?: string | null;
+  main_species?: {
+    edible?: boolean | null;
+    vegetable?: boolean | null;
+    growth?: {
+      light?: number | null;
+      atmospheric_humidity?: number | null;
+      soil_texture?: number | null;
+    } | null;
+    specifications?: {
+      growth_form?: string | null;
+      toxicity?: string | null;
+    } | null;
+  } | null;
+};
+
+type TreflePlantListResponse = {
+  data?: TreflePlant[];
+};
+
+type TreflePlantResponse = {
+  data?: TreflePlant;
+};
+
 type CareProfile = {
-  provider: "Perenual" | "GrowMate";
+  provider: "Perenual" | "Trefle" | "GrowMate";
   perenualId: number | null;
   scientificName: string;
   commonName: string | null;
@@ -81,7 +113,7 @@ type CareProfile = {
   growthHabit: string | null;
   toxicity: string | null;
   imageUrl: string | null;
-  source: "cache" | "perenual" | "fallback";
+  source: "cache" | "perenual" | "trefle" | "fallback";
 };
 
 const corsHeaders = {
@@ -94,7 +126,7 @@ const allowedOrgans = new Set(["leaf", "flower", "fruit", "bark", "habit", "othe
 const allowedMimeTypes = new Set(["image/jpeg", "image/jpg", "image/png", "image/webp"]);
 const maxImageBase64Length = 8_000_000;
 const maxRequestBytes = 9 * 1024 * 1024;
-const scanLimit = 20;
+const scanLimit = 100;
 const scanWindowMs = 60 * 60 * 1000;
 const careLookupPromises = new Map<string, Promise<CareProfile>>();
 
@@ -164,7 +196,7 @@ function toText(value: string[] | string | null | undefined) {
 }
 
 function isPremiumPlaceholder(value: string | null | undefined) {
-  return Boolean(value && /upgrade\s+plans|premium\/supreme|subscription-api-pricing|perenual\.com\/subscription/i.test(value));
+  return Boolean(value && /get\s+premium|upgrade\s+plans|premium\/supreme|subscription-api-pricing|out.?of.?credits|quota|perenual\.com\/subscription/i.test(value));
 }
 
 function cleanCareText(value: string | null | undefined) {
@@ -185,6 +217,23 @@ function hasUsableCare(profile: CareProfile | null) {
       profile.growthHabit ||
       profile.toxicity,
   );
+}
+
+function sanitizeCareProfile(profile: CareProfile): CareProfile | null {
+  const cleaned = {
+    ...profile,
+    summary: cleanCareText(profile.summary),
+    watering: cleanCareText(profile.watering),
+    sunlight: cleanCareText(profile.sunlight),
+    soil: cleanCareText(profile.soil),
+    pruning: cleanCareText(profile.pruning),
+    propagation: cleanCareText(profile.propagation),
+    cycle: cleanCareText(profile.cycle),
+    growthHabit: cleanCareText(profile.growthHabit),
+    toxicity: cleanCareText(profile.toxicity),
+  };
+
+  return hasUsableCare(cleaned) ? cleaned : null;
 }
 
 function inferCategory(name: string, commonNames: string[]) {
@@ -300,6 +349,55 @@ function profileFromPerenualSpecies(
   };
 }
 
+function formatTrefleLight(value: number | null | undefined) {
+  if (typeof value !== "number") return null;
+  return `Trefle light score: ${value}/10. Use this as a starting point and adjust to the plant's response.`;
+}
+
+function formatTrefleHumidity(value: number | null | undefined) {
+  if (typeof value !== "number") return null;
+  return `Trefle humidity score: ${value}/10. Keep airflow steady and avoid letting leaves stay wet.`;
+}
+
+function formatTrefleSoil(value: number | null | undefined) {
+  if (typeof value !== "number") return null;
+  return `Trefle soil texture score: ${value}/10. Use a loose, well-draining mix unless the species requires otherwise.`;
+}
+
+function profileFromTreflePlant(plant: TreflePlant, scientificName: string, commonNames: string[], category: string): CareProfile {
+  const mainSpecies = plant.main_species;
+  const family = plant.family_common_name ?? plant.family ?? null;
+  const genus = plant.genus ?? null;
+  const details = [
+    family ? `Family: ${family}` : null,
+    genus ? `Genus: ${genus}` : null,
+    mainSpecies?.edible || mainSpecies?.vegetable ? "May have edible or vegetable use; confirm safety before consuming." : null,
+  ].filter(Boolean);
+
+  return {
+    provider: "Trefle",
+    perenualId: null,
+    scientificName: plant.scientific_name ?? scientificName,
+    commonName: plant.common_name ?? commonNames[0] ?? null,
+    summary: details.length > 0 ? `Trefle plant database match. ${details.join(" ")}` : "Trefle plant database match.",
+    watering: formatTrefleHumidity(mainSpecies?.growth?.atmospheric_humidity),
+    sunlight: formatTrefleLight(mainSpecies?.growth?.light),
+    soil: formatTrefleSoil(mainSpecies?.growth?.soil_texture),
+    pruning: null,
+    propagation: null,
+    cycle: null,
+    growthHabit: mainSpecies?.specifications?.growth_form ?? category,
+    toxicity: cleanCareText(mainSpecies?.specifications?.toxicity),
+    imageUrl: plant.image_url ?? null,
+    source: "trefle",
+  };
+}
+
+function normalizeCareProvider(provider: string | null | undefined): CareProfile["provider"] {
+  if (provider === "Perenual" || provider === "Trefle") return provider;
+  return "GrowMate";
+}
+
 async function fetchPerenualCareProfile(scientificName: string, commonNames: string[], category: string, apiKey: string): Promise<CareProfile | null> {
   const searchUrl = new URL("https://perenual.com/api/species-list");
   searchUrl.searchParams.set("key", apiKey);
@@ -336,6 +434,49 @@ async function fetchPerenualCareProfile(scientificName: string, commonNames: str
   return profileFromPerenualSpecies(await detailsResponse.json() as PerenualDetailsResponse, scientificName, commonNames, category);
 }
 
+async function fetchTrefleCareProfile(scientificName: string, commonNames: string[], category: string, token: string): Promise<CareProfile | null> {
+  const fetchSearch = async (filterName: "filter[scientific_name]" | "filter[common_name]", query: string) => {
+    const searchUrl = new URL("https://trefle.io/api/v1/plants");
+    searchUrl.searchParams.set("token", token);
+    searchUrl.searchParams.set(filterName, query);
+    return fetch(searchUrl);
+  };
+
+  let searchResponse = await fetchSearch("filter[scientific_name]", scientificName);
+  if (!searchResponse.ok) {
+    console.warn(`Trefle plant lookup failed: ${searchResponse.status}`);
+    return null;
+  }
+
+  let searchData = (await searchResponse.json()) as TreflePlantListResponse;
+  if (!searchData.data?.length && commonNames[0]) {
+    searchResponse = await fetchSearch("filter[common_name]", commonNames[0]);
+    if (searchResponse.ok) {
+      searchData = (await searchResponse.json()) as TreflePlantListResponse;
+    }
+  }
+
+  const plant = searchData.data?.[0] ?? null;
+  if (!plant) return null;
+
+  if (plant.slug) {
+    const detailsUrl = new URL(`https://trefle.io/api/v1/plants/${plant.slug}`);
+    detailsUrl.searchParams.set("token", token);
+    const detailsResponse = await fetch(detailsUrl);
+
+    if (detailsResponse.ok) {
+      const detailsData = (await detailsResponse.json()) as TreflePlantResponse;
+      if (detailsData.data) {
+        return profileFromTreflePlant(detailsData.data, scientificName, commonNames, category);
+      }
+    } else {
+      console.warn(`Trefle plant details lookup failed: ${detailsResponse.status}`);
+    }
+  }
+
+  return profileFromTreflePlant(plant, scientificName, commonNames, category);
+}
+
 async function loadCachedCareProfile(client: ReturnType<typeof createClient>, normalizedScientificName: string): Promise<CareProfile | null> {
   const { data: careCache, error: careCacheError } = await client
     .from("plant_care_cache")
@@ -345,8 +486,8 @@ async function loadCachedCareProfile(client: ReturnType<typeof createClient>, no
 
   if (!careCacheError && careCache) {
     console.log(`Plant care source: Supabase cache (${normalizedScientificName})`);
-    return {
-      provider: careCache.provider === "Perenual" ? "Perenual" : "GrowMate",
+    return sanitizeCareProfile({
+      provider: normalizeCareProvider(careCache.provider),
       perenualId: careCache.perenual_id,
       scientificName: careCache.scientific_name,
       commonName: careCache.common_name,
@@ -361,7 +502,7 @@ async function loadCachedCareProfile(client: ReturnType<typeof createClient>, no
       toxicity: null,
       imageUrl: careCache.image_url,
       source: "cache",
-    };
+    });
   }
 
   const { data: legacyProfile, error: legacyError } = await client
@@ -374,8 +515,8 @@ async function loadCachedCareProfile(client: ReturnType<typeof createClient>, no
 
   console.log(`Plant care source: legacy Supabase cache (${normalizedScientificName})`);
 
-  return {
-    provider: legacyProfile.provider === "Perenual" ? "Perenual" : "GrowMate",
+  return sanitizeCareProfile({
+    provider: normalizeCareProvider(legacyProfile.provider),
     perenualId: null,
     scientificName: legacyProfile.scientific_name,
     commonName: legacyProfile.common_name,
@@ -390,7 +531,7 @@ async function loadCachedCareProfile(client: ReturnType<typeof createClient>, no
     toxicity: legacyProfile.toxicity,
     imageUrl: legacyProfile.image_url,
     source: "cache",
-  };
+  });
 }
 
 async function saveCareProfile(client: ReturnType<typeof createClient> | null, normalizedScientificName: string, profile: CareProfile) {
@@ -451,6 +592,7 @@ async function getCareProfileWithCache(
   commonNames: string[],
   category: string,
   perenualApiKey: string | undefined,
+  trefleToken: string | undefined,
   allowPerenualLookup: boolean,
 ) {
   const normalizedScientificName = normalizeScientificName(scientificName);
@@ -475,6 +617,20 @@ async function getCareProfileWithCache(
         }
       } catch (careError) {
         console.warn("Perenual care lookup failed:", careError);
+      }
+    }
+
+    if (!profile) {
+      if (trefleToken) {
+        try {
+          const trefleProfile = await fetchTrefleCareProfile(scientificName, commonNames, category, trefleToken);
+          profile = hasUsableCare(trefleProfile) ? trefleProfile : null;
+          if (profile) {
+            console.log(`Plant care source: Trefle API (${normalizedScientificName})`);
+          }
+        } catch (careError) {
+          console.warn("Trefle care lookup failed:", careError);
+        }
       }
     }
 
@@ -570,6 +726,7 @@ Deno.serve(async (request) => {
 
   const apiKey = Deno.env.get("PLANTNET_API_KEY");
   const perenualApiKey = Deno.env.get("PERENUAL_API_KEY");
+  const trefleToken = Deno.env.get("TREFLE_TOKEN");
 
   if (!apiKey) {
     return jsonResponse({ error: "PlantNet secret is not configured." }, 500);
@@ -674,7 +831,7 @@ Deno.serve(async (request) => {
   const confidence = Math.round((best.score ?? 0) * 1000) / 10;
   const category = inferCategory(scientificName, commonNames);
   const decision = getSaleDecision(scientificName, commonNames, confidence);
-  const careProfile = await getCareProfileWithCache(supabase, supabaseAdmin, scientificName, commonNames, category, perenualApiKey ?? undefined, currentUserIsAdmin);
+  const careProfile = await getCareProfileWithCache(supabase, supabaseAdmin, scientificName, commonNames, category, perenualApiKey ?? undefined, trefleToken ?? undefined, currentUserIsAdmin);
 
   const alternativeMatches = (data.results ?? []).slice(1, 5).map((match) => {
     const matchScientificName = match.species?.scientificNameWithoutAuthor ?? null;

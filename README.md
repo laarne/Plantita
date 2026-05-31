@@ -33,3 +33,5 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_publishable_or_anon_key
 ```
 
 Private API keys must stay on a backend or Supabase Edge Function, not inside the mobile app.
+
+For EAS preview/production builds, define the same public Expo variables in EAS environment variables instead of hardcoding them in `eas.json`.

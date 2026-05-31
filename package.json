@@ -4,9 +4,17 @@
   "private": true,
   "description": "GrowMate production mobile app. React Native app lives in native/; Supabase schema lives in supabase/.",
   "scripts": {
+    "dev": "npm --prefix native start",
     "start": "npm --prefix native start",
+    "web": "npm --prefix native run web",
+    "build:web": "npm --prefix native run build:web",
     "android": "npm --prefix native run android",
     "ios": "npm --prefix native run ios",
-    "typecheck": "npm --prefix native run typecheck"
+    "typecheck": "npm --prefix native run typecheck",
+    "doctor": "npm --prefix native run doctor",
+    "audit": "npm --prefix native audit --omit=dev"
+  },
+  "devDependencies": {
+    "supabase": "^2.102.0"
   }
 }
