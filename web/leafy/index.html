@@ -59,13 +59,11 @@
     </video>
     <div class="controls">
       <button id="soundButton" class="control-button" type="button">Tap for sound</button>
-      <button id="fullscreenButton" class="control-button" type="button">Fullscreen</button>
     </div>
     <script>
       const video = document.getElementById('leafyVideo');
       const source = document.getElementById('leafySource');
       const soundButton = document.getElementById('soundButton');
-      const fullscreenButton = document.getElementById('fullscreenButton');
 
       if (window.location.protocol === 'file:') {
         source.src = './leafy-final.mp4';
@@ -90,23 +88,6 @@
         } catch {
           soundButton.textContent = 'Tap again for sound';
         }
-      });
-
-      fullscreenButton.addEventListener('click', async () => {
-        const target = document.documentElement;
-        try {
-          if (document.fullscreenElement) {
-            await document.exitFullscreen();
-          } else {
-            await target.requestFullscreen();
-          }
-        } catch {
-          fullscreenButton.textContent = 'Fullscreen unavailable';
-        }
-      });
-
-      document.addEventListener('fullscreenchange', () => {
-        fullscreenButton.textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen';
       });
 
       startMuted();

@@ -415,6 +415,47 @@
       margin-top: 14px;
     }
 
+    .level-picker {
+      padding: 2px 0;
+    }
+
+    .level-picker-top {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .level-picker-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #dcfce7, #e0f2fe);
+      overflow: hidden;
+    }
+
+    .level-picker-icon .badge-img {
+      border-radius: 16px;
+    }
+
+    .level-picker h3 {
+      color: #123524;
+      font-size: 1.35rem;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 5px;
+    }
+
+    .level-picker p {
+      color: #64748b;
+      font-size: 0.88rem;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
     .level-card {
       display: flex;
       align-items: center;
@@ -635,7 +676,8 @@
   <script>
     function assetUrl(name) {
       const safeName = /^[a-z0-9-]+$/.test(name) ? name : 'sprout';
-      return `./assets/${safeName}.svg`;
+      const assetBase = window.location.protocol === 'file:' ? './assets' : '/games/assets';
+      return `${assetBase}/${safeName}.svg`;
     }
 
     function assetImg(name, alt = '', className = 'asset-img') {
@@ -710,10 +752,14 @@
     function showMemoryLevels() {
       gameTitle.textContent = 'Plant Memory Match';
       gameContent.innerHTML = `
-        <div class="result-card" style="padding-top:6px;">
-          <div class="result-emoji">${assetImg('memory', 'Memory game', 'badge-img badge-icon')}</div>
-          <h3>Choose a level</h3>
-          <p>Pick your board size and timer before you start matching real plant photos.</p>
+        <div class="level-picker">
+          <div class="level-picker-top">
+            <div class="level-picker-icon">${assetImg('memory', 'Memory game', 'badge-img badge-icon')}</div>
+            <div>
+              <h3>Choose a level</h3>
+              <p>Pick your board size and timer.</p>
+            </div>
+          </div>
           <div class="level-grid">
             <button class="level-card" onclick="startMemoryGame('easy')">
               <span><strong>Easy</strong>4 pairs · 20 seconds</span>
