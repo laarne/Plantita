@@ -723,19 +723,18 @@
       return { highScore: currentHighScore, isNewHighScore: false };
     }
 
-    function renderResult({ title, asset, score, message, replay, gameKey }) {
+    function renderResult({ title, asset, score, message, replay, gameKey, didWin }) {
       clearTimers();
-      const { highScore, isNewHighScore } = saveHighScore(gameKey, score);
+      const { isNewHighScore } = saveHighScore(gameKey, score);
       gameContent.innerHTML = `
         <div class="result-card">
           <div class="result-emoji">${asset}</div>
           <h3>${title}</h3>
-          ${isNewHighScore ? '<div style="display:inline-flex; margin-bottom:10px; padding:8px 12px; border-radius:999px; background:#fef3c7; color:#92400e; font-weight:1000;">New Highest Score!</div>' : ''}
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:10px 0 16px;">
-            <div class="hud-box"><span>Your Score</span><strong>${score}</strong></div>
-            <div class="hud-box"><span>Highest Score</span><strong>${highScore}</strong></div>
+          <div style="display:inline-flex; margin:8px 0 14px; padding:10px 14px; border-radius:999px; background:${didWin ? '#dcfce7' : '#fee2e2'}; color:${didWin ? '#166534' : '#991b1b'}; font-weight:1000;">
+            ${didWin ? 'Congratulations, you win!' : 'Sorry, try again next time.'}
           </div>
-          <p>${message}<br><strong>Try another level or beat your best score.</strong></p>
+          ${isNewHighScore ? '<div style="margin-bottom:10px; color:#92400e; font-weight:900;">New personal best saved.</div>' : ''}
+          <p>${message}</p>
           <div style="display:grid; gap:10px;">
             <button class="primary-btn" onclick="${replay}">Play Again</button>
             <button class="secondary-btn" onclick="closeGame()">Choose Another Game</button>
@@ -860,7 +859,8 @@
           score: finalScore,
           message: `You found ${matched} plant pairs in ${moves} moves.`,
           replay: `startMemoryGame('${levelKey}')`,
-          gameKey: `memory_${levelKey}`
+          gameKey: `memory_${levelKey}`,
+          didWin: matched === level.pairs
         });
       }
 
