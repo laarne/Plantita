@@ -744,9 +744,9 @@
     }
 
     const MEMORY_LEVELS = {
-      easy: { label: 'Easy', pairs: 4, cols: 4, time: 20 },
-      medium: { label: 'Medium', pairs: 6, cols: 4, time: 50 },
-      hard: { label: 'Hard', pairs: 8, cols: 4, time: 60 }
+      easy: { label: 'Easy', pairs: 4, cols: 4, time: 10 },
+      medium: { label: 'Medium', pairs: 6, cols: 4, time: 20 },
+      hard: { label: 'Hard', pairs: 8, cols: 4, time: 30 }
     };
 
     function showMemoryLevels() {
@@ -762,15 +762,15 @@
           </div>
           <div class="level-grid">
             <button class="level-card" onclick="startMemoryGame('easy')">
-              <span><strong>Easy</strong>4 pairs · 20 seconds</span>
+              <span><strong>Easy</strong>4 pairs · 10 seconds</span>
               <small>Start</small>
             </button>
             <button class="level-card" onclick="startMemoryGame('medium')">
-              <span><strong>Medium</strong>6 pairs · 50 seconds</span>
+              <span><strong>Medium</strong>6 pairs · 20 seconds</span>
               <small>Start</small>
             </button>
             <button class="level-card" onclick="startMemoryGame('hard')">
-              <span><strong>Hard</strong>8 pairs · 60 seconds</span>
+              <span><strong>Hard</strong>8 pairs · 30 seconds</span>
               <small>Start</small>
             </button>
           </div>
