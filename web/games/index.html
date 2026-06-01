@@ -487,6 +487,11 @@
       margin-bottom: 14px;
     }
 
+    .memory-stage {
+      min-height: auto;
+      padding: 14px;
+    }
+
     .memory-board {
       display: grid;
       grid-template-columns: repeat(var(--memory-cols, 4), 1fr);
@@ -836,17 +841,22 @@
         padding: 10px;
       }
 
+      .memory-stage {
+        padding: 6px;
+        margin-bottom: 8px;
+      }
+
       .modal {
-        align-items: flex-start;
-        padding: 8px;
-        padding-top: max(8px, env(safe-area-inset-top));
+        align-items: center;
+        padding: 4px;
       }
 
       .game-panel {
-        width: min(100%, 390px);
-        max-height: calc(100dvh - 16px);
-        border-radius: 22px;
-        padding: 10px;
+        width: calc(100vw - 8px);
+        max-width: none;
+        max-height: calc(100dvh - 8px);
+        border-radius: 20px;
+        padding: 8px;
       }
 
       .panel-top {
@@ -891,11 +901,11 @@
       }
 
       .memory-board {
-        gap: 6px;
+        gap: 5px;
       }
 
       .memory-card {
-        border-radius: 12px;
+        border-radius: 11px;
         min-width: 0;
       }
 
@@ -971,7 +981,9 @@
       }
 
       .game-panel {
-        padding: 8px;
+        width: calc(100vw - 6px);
+        max-height: calc(100dvh - 6px);
+        padding: 6px;
       }
     }
   </style>
@@ -1183,7 +1195,7 @@
       const cards = [...plants, ...plants].map((plant, index) => ({ ...plant, id: index, flipped: false, matched: false })).sort(() => Math.random() - 0.5);
       function renderBoard() {
         const progress = Math.max(0, time / level.time * 100);
-        gameContent.innerHTML = `<div class="game-hud"><div class="timer-ring" id="timerRing" style="--timer-progress:${progress}%"><span id="memoryTime">${time}s</span></div><div class="hud-meta"><span>Pairs</span><strong id="memoryPairs">${matched}/${level.pairs}</strong></div><div class="hud-meta hud-moves"><span>Moves</span><strong id="memoryMoves">${moves}</strong></div></div><div class="stage" style="min-height:auto; padding:14px;"><div class="memory-board" id="memoryBoard" style="--memory-cols:${level.cols};">${cards.map((card, i) => `<button class="memory-card ${card.flipped ? 'flipped' : ''} ${card.matched ? 'matched' : ''}" onclick="flipMemoryCard(${i})"><span class="memory-card-inner"><span class="memory-card-face memory-card-back-face"></span><span class="memory-card-face memory-card-front-face"><img src="${card.photo}" alt="${card.name}" class="memory-img" /></span></span></button>`).join('')}</div></div><div class="hud" style="margin-top:10px; margin-bottom:0;"><div class="hud-box"><span>Score</span><strong id="memoryScore">${score}</strong></div><div class="hud-box"><span>Best</span><strong>${getHighScore(`memory_${levelKey}`)}</strong></div></div>`;
+        gameContent.innerHTML = `<div class="game-hud"><div class="timer-ring" id="timerRing" style="--timer-progress:${progress}%"><span id="memoryTime">${time}s</span></div><div class="hud-meta"><span>Pairs</span><strong id="memoryPairs">${matched}/${level.pairs}</strong></div><div class="hud-meta hud-moves"><span>Moves</span><strong id="memoryMoves">${moves}</strong></div></div><div class="stage memory-stage"><div class="memory-board" id="memoryBoard" style="--memory-cols:${level.cols};">${cards.map((card, i) => `<button class="memory-card ${card.flipped ? 'flipped' : ''} ${card.matched ? 'matched' : ''}" onclick="flipMemoryCard(${i})"><span class="memory-card-inner"><span class="memory-card-face memory-card-back-face"></span><span class="memory-card-face memory-card-front-face"><img src="${card.photo}" alt="${card.name}" class="memory-img" /></span></span></button>`).join('')}</div></div><div class="hud" style="margin-top:10px; margin-bottom:0;"><div class="hud-box"><span>Score</span><strong id="memoryScore">${score}</strong></div><div class="hud-box"><span>Best</span><strong>${getHighScore(`memory_${levelKey}`)}</strong></div></div>`;
       }
       window.flipMemoryCard = function (index) {
         if (ended || lockBoard) return;
