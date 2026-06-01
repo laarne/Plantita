@@ -13,6 +13,7 @@
 
     body {
       min-height: 100vh;
+      min-height: 100dvh;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
         radial-gradient(circle at 16% 4%, rgba(34, 197, 94, 0.22), transparent 28%),
@@ -307,8 +308,8 @@
 
     .game-panel {
       position: relative;
-      width: min(560px, 100%);
-      max-height: 92vh;
+      width: min(560px, calc(100vw - 28px));
+      max-height: calc(100dvh - 28px);
       overflow-y: auto;
       background: #ffffff;
       border-radius: 28px;
@@ -589,34 +590,201 @@
     }
 
     @media (max-width: 520px) {
+      body {
+        background:
+          radial-gradient(circle at 20% 0%, rgba(34, 197, 94, 0.18), transparent 30%),
+          linear-gradient(135deg, #f8fbf5 0%, #ecfdf3 54%, #f8fafc 100%);
+      }
+
       .app {
-        padding: 12px 10px 28px;
+        padding: 10px 10px 24px;
       }
 
       .hero {
-        border-radius: 26px;
-        padding: 24px 14px;
+        border-radius: 22px;
+        padding: 20px 14px;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 13vw, 3.35rem);
+        letter-spacing: -0.045em;
+      }
+
+      .hero p {
+        font-size: 0.96rem;
+        line-height: 1.45;
       }
 
       .score-strip {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+      }
+
+      .mini-stat {
+        border-radius: 16px;
+        padding: 10px 6px;
+      }
+
+      .mini-stat strong {
+        font-size: 0.86rem;
+      }
+
+      .mini-stat span {
+        font-size: 0.68rem;
       }
 
       .section-title {
         align-items: start;
         flex-direction: column;
         gap: 5px;
+        margin-top: 22px;
+      }
+
+      .games-grid-single {
+        grid-template-columns: 1fr;
+      }
+
+      .game-card {
+        min-height: 0;
+        border-radius: 22px;
+        padding: 18px;
+      }
+
+      .icon-bubble {
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
+      }
+
+      .icon-svg {
+        width: 36px;
+        height: 36px;
       }
 
       .stage {
-        min-height: 300px;
+        min-height: 0;
+        border-radius: 20px;
+        padding: 10px;
+      }
+
+      .modal {
+        align-items: flex-start;
+        padding: 8px;
+        padding-top: max(8px, env(safe-area-inset-top));
       }
 
       .game-panel {
-        border-radius: 26px;
-        padding: 14px;
+        width: min(100%, 390px);
+        max-height: calc(100dvh - 16px);
+        border-radius: 22px;
+        padding: 10px;
       }
 
+      .panel-top {
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .panel-top h2 {
+        font-size: clamp(1rem, 7vw, 1.55rem);
+        line-height: 1.15;
+      }
+
+      .close-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 14px;
+        flex: 0 0 auto;
+      }
+
+      .hud {
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .hud-box {
+        border-radius: 15px;
+        padding: 10px;
+      }
+
+      .hud-box span {
+        font-size: 0.66rem;
+      }
+
+      .hud-box strong {
+        font-size: 1.08rem;
+      }
+
+      .timer-bar,
+      .health-bar {
+        height: 9px;
+        margin: 6px 0 10px;
+      }
+
+      .memory-board {
+        gap: 6px;
+      }
+
+      .memory-card {
+        border-radius: 12px;
+        min-width: 0;
+      }
+
+      .level-picker-top {
+        grid-template-columns: 48px 1fr;
+        gap: 10px;
+      }
+
+      .level-picker-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+      }
+
+      .level-picker h3 {
+        font-size: 1.12rem;
+      }
+
+      .level-picker p,
+      .result-card p {
+        font-size: 0.86rem;
+      }
+
+      .level-card {
+        border-radius: 16px;
+        padding: 13px;
+      }
+
+      .result-card {
+        padding: 10px 0 4px;
+      }
+
+      .result-emoji {
+        width: 74px;
+        height: 74px;
+        border-radius: 22px;
+        margin-bottom: 10px;
+      }
+
+      .result-card h3 {
+        font-size: clamp(1.55rem, 11vw, 2.15rem);
+        line-height: 1.05;
+      }
+
+    }
+
+    @media (max-width: 360px) {
+      .score-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .memory-board {
+        gap: 5px;
+      }
+
+      .game-panel {
+        padding: 8px;
+      }
     }
   </style>
 </head>
