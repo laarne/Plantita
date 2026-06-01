@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Leafy AI</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: #07130d;
+        overflow: hidden;
+      }
+
+      .leafy-video {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        width: 100dvw;
+        height: 100vh;
+        height: 100dvh;
+        object-fit: cover;
+        background: #07130d;
+      }
+
+      .controls {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        bottom: max(24px, env(safe-area-inset-bottom, 24px));
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        width: auto;
+        max-width: calc(100vw - 32px);
+        max-width: calc(100dvw - 32px);
+      }
+
+      .control-button {
+        min-height: 48px;
+        padding: 0 24px;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 999px;
+        background: rgba(7, 19, 13, 0.72);
+        color: #ffffff;
+        font: 800 15px/1 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        cursor: pointer;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        white-space: nowrap;
+        width: 100%;
+      }
+
+      .control-button.hidden {
+        display: none;
+      }
+
+      @media (max-width: 480px) {
+        .controls {
+          bottom: max(16px, env(safe-area-inset-bottom, 16px));
+          max-width: calc(100vw - 24px);
+          max-width: calc(100dvw - 24px);
+        }
+        .control-button {
+          font-size: 14px;
+          padding: 0 20px;
+          min-height: 48px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .controls {
+          left: 16px;
+          right: 16px;
+          transform: none;
+          max-width: none;
+        }
+      }
+
+      @media (orientation: landscape) and (max-height: 480px) {
+        .controls {
+          bottom: max(8px, env(safe-area-inset-bottom, 8px));
+        }
+        .control-button {
+          min-height: 40px;
+          font-size: 13px;
+          padding: 0 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <video id="leafyVideo" class="leafy-video" autoplay loop playsinline preload="auto" aria-label="Leafy AI video">
+      <source id="leafySource" src="/leafy/leafy-final.mp4" type="video/mp4" />
+    </video>
+    <div class="controls">
+      <button id="soundButton" class="control-button" type="button">Tap for sound</button>
+    </div>
+    <script>
+      const video = document.getElementById('leafyVideo');
+      const source = document.getElementById('leafySource');
+      const soundButton = document.getElementById('soundButton');
+
+      if (window.location.protocol === 'file:') {
+        source.src = './leafy-final.mp4';
+        video.load();
+      }
+
+      async function startMuted() {
+        video.muted = true;
+        try {
+          await video.play();
+        } catch {
+          soundButton.textContent = 'Tap to play';
+        }
+      }
+
+      soundButton.addEventListener('click', async () => {
+        video.muted = false;
+        video.volume = 1;
+        try {
+          await video.play();
+          soundButton.classList.add('hidden');
+        } catch {
+          soundButton.textContent = 'Tap again for sound';
+        }
+      });
+
+      startMuted();
+    </script>
+  </body>
+</html>
