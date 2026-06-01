@@ -253,6 +253,19 @@
       margin-bottom: 18px;
     }
 
+    .best-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      background: #f0fdf4;
+      color: #166534;
+      font-size: 0.78rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
     .primary-btn,
     .secondary-btn,
     .danger-btn {
@@ -349,6 +362,77 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-bottom: 14px;
+    }
+
+    .game-hud {
+      position: sticky;
+      top: 0;
+      z-index: 8;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(22, 101, 52, 0.1);
+      box-shadow: 0 12px 28px rgba(22, 101, 52, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    .timer-ring {
+      position: relative;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(#22c55e var(--timer-progress, 100%), #e2e8f0 0);
+      color: #123524;
+      font-weight: 1000;
+    }
+
+    .timer-ring::after {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+
+    .timer-ring span {
+      position: relative;
+      z-index: 1;
+      font-size: 0.94rem;
+    }
+
+    .hud-meta {
+      min-width: 0;
+    }
+
+    .hud-meta span {
+      display: block;
+      color: #64748b;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .hud-meta strong {
+      display: block;
+      color: #123524;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+
+    .hud-moves {
+      min-width: 70px;
+      padding: 9px 10px;
+      border-radius: 16px;
+      background: #f8fafc;
+      text-align: center;
     }
 
     .hud-box {
@@ -464,9 +548,10 @@
       gap: 14px;
       padding: 16px;
       border-radius: 20px;
-      background: #f8fafc;
-      border: 1px solid rgba(15, 23, 42, 0.07);
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,253,244,0.82));
+      border: 1px solid rgba(22, 101, 52, 0.12);
       text-align: left;
+      box-shadow: 0 10px 24px rgba(22, 101, 52, 0.07);
       transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
     }
 
@@ -495,10 +580,15 @@
       white-space: nowrap;
     }
 
+    .expert-card {
+      opacity: 0.58;
+      cursor: default;
+    }
+
     .memory-card {
       aspect-ratio: 1 / 1;
       border-radius: 16px;
-      background: #0ea5e9;
+      background: transparent;
       color: #ffffff;
       display: grid;
       place-items: center;
@@ -509,26 +599,75 @@
       padding: 0;
       transition: transform 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
       touch-action: manipulation;
+      perspective: 800px;
     }
 
     .memory-card:hover {
       box-shadow: 0 14px 28px rgba(14, 165, 233, 0.26);
+      transform: translateY(-2px) scale(1.02);
     }
 
     .memory-card:active {
       transform: scale(0.94);
     }
 
-    .memory-card.flipped,
-    .memory-card.matched {
+    .memory-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      transform-style: preserve-3d;
+      transition: transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .memory-card.flipped .memory-card-inner,
+    .memory-card.matched .memory-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .memory-card-face {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: inherit;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .memory-card-back-face {
+      background:
+        radial-gradient(circle at 24% 22%, rgba(191, 234, 85, 0.22), transparent 20%),
+        linear-gradient(135deg, #123524, #0b2417);
+    }
+
+    .memory-card-back-face::before {
+      content: '';
+      width: 58%;
+      height: 58%;
+      border-radius: 100% 0 100% 0;
+      background: rgba(191, 234, 85, 0.55);
+      transform: rotate(-18deg);
+      box-shadow: 18px 16px 0 rgba(255,255,255,0.08);
+    }
+
+    .memory-card-front-face {
       background: #dcfce7;
-      color: #123524;
-      box-shadow: inset 0 0 0 2px rgba(22, 101, 52, 0.12), 0 10px 20px rgba(22, 101, 52, 0.12);
+      transform: rotateY(180deg);
+      box-shadow: inset 0 0 0 2px rgba(22, 101, 52, 0.12);
     }
 
     .memory-card.matched {
-      background: #bbf7d0;
+      animation: matchPulse 480ms ease;
+      opacity: 0.62;
       transform: scale(0.96);
+    }
+
+    @keyframes matchPulse {
+      0% { transform: scale(1); }
+      45% { transform: scale(1.08); }
+      100% { transform: scale(0.96); }
     }
 
     .result-card {
@@ -573,6 +712,36 @@
       font-size: 1.7rem;
       font-weight: 1000;
       margin-bottom: 16px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin: 12px 0 16px;
+    }
+
+    .result-stat {
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid rgba(15, 23, 42, 0.07);
+      padding: 11px 8px;
+    }
+
+    .result-stat span {
+      display: block;
+      color: #64748b;
+      font-size: 0.66rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .result-stat strong {
+      display: block;
+      color: #123524;
+      font-size: 1rem;
+      margin-top: 4px;
     }
 
     .hidden {
@@ -730,6 +899,21 @@
         min-width: 0;
       }
 
+      .game-hud {
+        grid-template-columns: 52px 1fr 66px;
+        padding: 8px;
+        border-radius: 18px;
+      }
+
+      .timer-ring {
+        width: 52px;
+        height: 52px;
+      }
+
+      .timer-ring span {
+        font-size: 0.82rem;
+      }
+
       .level-picker-top {
         grid-template-columns: 48px 1fr;
         gap: 10px;
@@ -769,6 +953,10 @@
       .result-card h3 {
         font-size: clamp(1.55rem, 11vw, 2.15rem);
         line-height: 1.05;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
       }
 
     }
@@ -823,6 +1011,7 @@
           </div>
           <h3>Plant Memory Match</h3>
           <p>Choose your level, reveal plant photos, and pair every match before the timer runs out.</p>
+          <div class="best-pill" id="homeBest">Personal best: --</div>
         </div>
         <button class="primary-btn" onclick="openGame('memory')">Choose Level</button>
       </article>
@@ -891,9 +1080,25 @@
       return { highScore: currentHighScore, isNewHighScore: false };
     }
 
+    function vibrate(pattern) {
+      if ('vibrate' in navigator) navigator.vibrate(pattern);
+    }
+
+    function updateHomeBest() {
+      const bestEl = document.getElementById('homeBest');
+      if (!bestEl) return;
+      const best = Math.max(
+        getHighScore('memory_easy'),
+        getHighScore('memory_medium'),
+        getHighScore('memory_hard')
+      );
+      bestEl.textContent = best > 0 ? `Personal best: ${best}` : 'Personal best: --';
+    }
+
     function renderResult({ title, asset, score, message, replay, gameKey, didWin }) {
       clearTimers();
       const { isNewHighScore } = saveHighScore(gameKey, score);
+      updateHomeBest();
       gameContent.innerHTML = `
         <div class="result-card">
           <div class="result-emoji">${asset}</div>
@@ -902,7 +1107,12 @@
             ${didWin ? 'Congratulations, you win!' : 'Sorry, try again next time.'}
           </div>
           ${isNewHighScore ? '<div style="margin-bottom:10px; color:#92400e; font-weight:900;">New personal best saved.</div>' : ''}
-          <p>${message}</p>
+          <div class="result-grid">
+            <div class="result-stat"><span>Time</span><strong>${message.timeElapsed}s</strong></div>
+            <div class="result-stat"><span>Accuracy</span><strong>${message.accuracy}%</strong></div>
+            <div class="result-stat"><span>Rank</span><strong>${message.rank}</strong></div>
+          </div>
+          <p>${message.copy}</p>
           <div style="display:grid; gap:10px;">
             <button class="primary-btn" onclick="${replay}">Play Again</button>
             <button class="secondary-btn" onclick="closeGame()">Choose Another Game</button>
@@ -915,6 +1125,13 @@
       medium: { label: 'Medium', pairs: 6, cols: 4, time: 15 },
       hard: { label: 'Hard', pairs: 8, cols: 4, time: 25 }
     };
+
+    function getRank(didWin, elapsed, accuracy) {
+      if (!didWin) return 'Sprout';
+      if (accuracy >= 90 && elapsed <= 12) return 'Master Botanist';
+      if (accuracy >= 75) return 'Gardener';
+      return 'Plant Scout';
+    }
 
     function showMemoryLevels() {
       gameTitle.textContent = 'Plant Memory Match';
@@ -940,6 +1157,10 @@
               <span><strong>Hard</strong>8 pairs · 25 seconds</span>
               <small>Start</small>
             </button>
+            <button class="level-card expert-card" disabled>
+              <span><strong>Expert</strong>Coming soon</span>
+              <small>Locked</small>
+            </button>
           </div>
         </div>`;
     }
@@ -961,13 +1182,15 @@
       const plants = allPlants.slice(0, level.pairs);
       const cards = [...plants, ...plants].map((plant, index) => ({ ...plant, id: index, flipped: false, matched: false })).sort(() => Math.random() - 0.5);
       function renderBoard() {
-        gameContent.innerHTML = `<div class="hud"><div class="hud-box"><span>Pairs</span><strong id="memoryPairs">${matched}/${level.pairs}</strong></div><div class="hud-box"><span>Time</span><strong id="memoryTime">${time}s</strong></div></div><div class="timer-bar"><div class="timer-fill" id="memoryTimerFill" style="width:${time / level.time * 100}%"></div></div><div class="stage" style="min-height:auto; padding:14px;"><div class="memory-board" id="memoryBoard" style="--memory-cols:${level.cols};">${cards.map((card, i) => `<button class="memory-card ${card.flipped ? 'flipped' : ''} ${card.matched ? 'matched' : ''}" onclick="flipMemoryCard(${i})">${card.flipped || card.matched ? `<img src="${card.photo}" alt="${card.name}" class="memory-img" />` : assetImg('card-back', 'Hidden card', 'memory-img memory-card-back')}</button>`).join('')}</div></div><div class="hud" style="margin-top:10px; margin-bottom:0;"><div class="hud-box"><span>Moves</span><strong id="memoryMoves">${moves}</strong></div><div class="hud-box"><span>Score</span><strong id="memoryScore">${score}</strong></div></div>`;
+        const progress = Math.max(0, time / level.time * 100);
+        gameContent.innerHTML = `<div class="game-hud"><div class="timer-ring" id="timerRing" style="--timer-progress:${progress}%"><span id="memoryTime">${time}s</span></div><div class="hud-meta"><span>Pairs</span><strong id="memoryPairs">${matched}/${level.pairs}</strong></div><div class="hud-meta hud-moves"><span>Moves</span><strong id="memoryMoves">${moves}</strong></div></div><div class="stage" style="min-height:auto; padding:14px;"><div class="memory-board" id="memoryBoard" style="--memory-cols:${level.cols};">${cards.map((card, i) => `<button class="memory-card ${card.flipped ? 'flipped' : ''} ${card.matched ? 'matched' : ''}" onclick="flipMemoryCard(${i})"><span class="memory-card-inner"><span class="memory-card-face memory-card-back-face"></span><span class="memory-card-face memory-card-front-face"><img src="${card.photo}" alt="${card.name}" class="memory-img" /></span></span></button>`).join('')}</div></div><div class="hud" style="margin-top:10px; margin-bottom:0;"><div class="hud-box"><span>Score</span><strong id="memoryScore">${score}</strong></div><div class="hud-box"><span>Best</span><strong>${getHighScore(`memory_${levelKey}`)}</strong></div></div>`;
       }
       window.flipMemoryCard = function (index) {
         if (ended || lockBoard) return;
         const card = cards[index];
         if (!card || card.flipped || card.matched || card === firstCard) return;
 
+        vibrate(12);
         card.flipped = true;
         if (!firstCard) {
           firstCard = card;
@@ -985,6 +1208,7 @@
           secondCard.matched = true;
           matched += 1;
           score += Math.max(10, 70 - moves * 2);
+          vibrate([25, 35, 25]);
           firstCard = null;
           secondCard = null;
           lockBoard = false;
@@ -1006,8 +1230,10 @@
       function updateMemoryTimer() {
         const timeEl = document.getElementById('memoryTime');
         const fillEl = document.getElementById('memoryTimerFill');
+        const ringEl = document.getElementById('timerRing');
         if (timeEl) timeEl.textContent = time + 's';
         if (fillEl) fillEl.style.width = (time / level.time * 100) + '%';
+        if (ringEl) ringEl.style.setProperty('--timer-progress', `${Math.max(0, time / level.time * 100)}%`);
       }
 
       function endMemory() {
@@ -1015,6 +1241,10 @@
         ended = true;
         const timeBonus = Math.max(0, time * 2);
         const finalScore = score + timeBonus;
+        const didWin = matched === level.pairs;
+        const timeElapsed = level.time - Math.max(0, time);
+        const accuracy = Math.round((level.pairs / Math.max(moves, level.pairs)) * 100);
+        const rank = getRank(didWin, timeElapsed, accuracy);
         const badge = finalScore >= 220 ? 'Memory Master' : finalScore >= 120 ? 'Plant Matcher' : 'Curious Seedling';
         const asset = finalScore >= 220
           ? assetImg('trophy', 'Memory master badge', 'badge-img badge-icon')
@@ -1025,10 +1255,15 @@
           title: badge,
           asset,
           score: finalScore,
-          message: `You found ${matched} plant pairs in ${moves} moves.`,
+          message: {
+            copy: `You found ${matched} plant pairs in ${moves} moves.`,
+            timeElapsed,
+            accuracy,
+            rank
+          },
           replay: `startMemoryGame('${levelKey}')`,
           gameKey: `memory_${levelKey}`,
-          didWin: matched === level.pairs
+          didWin
         });
       }
 
@@ -1039,6 +1274,8 @@
         if (time <= 0) endMemory();
       }, 1000);
     }
+
+    updateHomeBest();
   </script>
 </body>
 </html>
