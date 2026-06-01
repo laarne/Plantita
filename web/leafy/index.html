@@ -55,7 +55,7 @@
   </head>
   <body>
     <video id="leafyVideo" class="leafy-video" autoplay loop playsinline preload="auto" aria-label="Leafy AI video">
-      <source src="./leafy-final.mp4" type="video/mp4" />
+      <source id="leafySource" src="/leafy/leafy-final.mp4" type="video/mp4" />
     </video>
     <div class="controls">
       <button id="soundButton" class="control-button" type="button">Tap for sound</button>
@@ -63,8 +63,14 @@
     </div>
     <script>
       const video = document.getElementById('leafyVideo');
+      const source = document.getElementById('leafySource');
       const soundButton = document.getElementById('soundButton');
       const fullscreenButton = document.getElementById('fullscreenButton');
+
+      if (window.location.protocol === 'file:') {
+        source.src = './leafy-final.mp4';
+        video.load();
+      }
 
       async function startMuted() {
         video.muted = true;
