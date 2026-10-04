@@ -3,401 +3,594 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="GrowMate is an AI-powered plant marketplace and community app for safer plant buying, selling, garden showcasing, and Leafy AI care support." />
-    <meta property="og:title" content="GrowMate | AI Plant Marketplace" />
-    <meta property="og:description" content="Buy, sell, identify, and care for plants safely with Leafy AI." />
-    <meta property="og:image" content="/landing-market.png" />
-    <link rel="icon" type="image/png" href="/growmate-logo.png" />
-    <title>GrowMate | AI Plant Marketplace</title>
+    <title>GrowMate: grow, learn and trade plants in the Philippines</title>
+    <meta name="description" content="GrowMate helps Filipinos grow plants and food at home with care advice made for Philippine weather, and connects home growers and small nurseries with buyers nearby." />
+    <meta name="theme-color" content="#f7faf4" />
+    <meta property="og:title" content="GrowMate: grow, learn and trade plants in the Philippines" />
+    <meta property="og:description" content="Learn what to grow, care for it with local weather in mind, and buy or sell plants with growers near you." />
+    <meta property="og:image" content="/img/monstera.webp" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png" />
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..950&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,500..700;1,7..72,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <a class="skip" href="#main">Skip to content</a>
 
-    <!-- ===== NAV ===== -->
-    <nav class="nav" id="nav" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="GrowMate home">
-        <img src="/growmate-logo.png" alt="" width="40" height="40" />
-        <span>GrowMate</span>
-      </a>
-      <ul class="nav-links" role="list">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#playground">Leafy AI</a></li>
-        <li><a href="#pathways">For You</a></li>
-        <li><a href="#community">Community</a></li>
-        <li><a href="#download">Download</a></li>
-      </ul>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <a class="nav-cta" href="/growmate.apk" download aria-label="Download GrowMate APK">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download Now
+    <header class="topnav">
+      <div class="topnav__inner">
+        <a class="brand" href="#top" aria-label="GrowMate, back to top">
+          <img src="/img/growmate-logo-128.webp" alt="" width="32" height="32" />
+          <span>GrowMate</span>
         </a>
-        <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
-          <span></span><span></span><span></span>
-        </button>
+        <nav aria-label="Sections">
+          <ul class="topnav__links">
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#about">What it is</a></li>
+            <li><a href="#market">Marketplace</a></li>
+            <li><a href="#impact">Impact</a></li>
+            <li><a href="#buying">How buying works</a></li>
+          </ul>
+        </nav>
+        <a class="btn btn--secondary btn--sm topnav__cta" href="#get" data-play-cta><span class="topnav__cta-long">Coming soon to Google Play</span><span class="topnav__cta-short">Soon on Google Play</span></a>
       </div>
-    </nav>
+    </header>
 
-    <!-- Mobile nav drawer -->
-    <div class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-      <a href="#features"  onclick="closeMenu()">Features</a>
-      <a href="#playground" onclick="closeMenu()">Leafy AI</a>
-      <a href="#pathways"  onclick="closeMenu()">For You</a>
-      <a href="#community" onclick="closeMenu()">Community</a>
-      <a href="#download"  onclick="closeMenu()">Download</a>
-      <a class="mobile-dl" href="/growmate.apk" download onclick="closeMenu()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download GrowMate APK
-      </a>
-    </div>
-
-    <main id="top">
-
-      <!-- ===== HERO ===== -->
-      <section class="hero" aria-label="GrowMate app introduction">
-        <div class="hero-bg" aria-hidden="true"></div>
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <p class="eyebrow">AI-powered plant marketplace</p>
-            <h1>Grow<br/>Mate</h1>
-            <p class="hero-statement">Buy, sell, identify,<br/>and care for plants safely.</p>
-            <p class="lead">GrowMate gives plantitos and plantitas a marketplace with Leafy AI checks, garden showcases, and a community that actually cares.</p>
-            <div class="hero-chips" aria-label="GrowMate highlights">
-              <span>
-                <svg class="hero-chip-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20c-3.9-2.2-6-5.1-6-8.5C5 7.9 7.9 5 11.5 5c1.5 0 2.9.5 4 1.5C16.5 5.5 17.8 5 19 5c0 5.8-2.8 10-8 15Z"/><path d="M11 20c.2-4.1 1.7-7.5 4.5-10.5"/></svg>
-                Leafy AI checks
-              </span>
-              <span>
-                <svg class="hero-chip-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h15l-2 8H8L6 7Z"/><path d="M6 7 5.4 4H3"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg>
-                Plant marketplace
-              </span>
-              <span>
-                <svg class="hero-chip-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V9"/><path d="M12 13C7 13 5 10.5 5 6c4.5 0 7 2 7 7Z"/><path d="M12 15c5 0 7-2.5 7-7-4.5 0-7 2-7 7Z"/></svg>
-                Garden profiles
-              </span>
-            </div>
-            <div class="hero-actions">
-              <a class="cta-primary" href="/growmate.apk" download id="hero-download">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download for Android
-              </a>
-              <span class="hero-note">Free · Android 8.0+ · 61 MB</span>
-            </div>
-          </div>
-
-          <div class="hero-phones" aria-label="GrowMate app screens" id="hero-phones">
-            <div class="phone-wrap phone-back">
-              <div class="phone">
-                <div class="phone-notch"></div>
-                <img src="/landing-feed.png" alt="GrowMate community feed screen" loading="eager" />
-              </div>
-            </div>
-            <div class="phone-wrap phone-center">
-              <div class="phone phone-primary">
-                <div class="phone-notch"></div>
-                <img src="/landing-market.png" alt="GrowMate marketplace screen" loading="eager" />
-              </div>
-            </div>
-            <div class="phone-wrap phone-side">
-              <div class="phone">
-                <div class="phone-notch"></div>
-                <img src="/landing-rankings.png" alt="GrowMate rankings screen" loading="eager" />
-              </div>
-            </div>
-          </div>
+    <main id="main">
+      <!-- Hero -->
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero__wash" aria-hidden="true"></div>
+        <div class="hero__leaves" aria-hidden="true">
+          <svg class="leaf leaf--a" viewBox="0 0 100 100"><path fill="#2e7d32" d="M50 96C24 80 6 56 11 33 15 15 34 8 50 23 66 8 85 15 89 33c5 23-13 47-39 63Z"/><path fill="none" stroke="#185a38" stroke-width="2.2" stroke-linecap="round" d="M50 92C49 70 50 45 50 26M50 58 32 44M50 70 68 55M50 46 64 35"/></svg>
+          <svg class="leaf leaf--b" viewBox="0 0 100 100"><path fill="#81c784" d="M50 3C77 30 82 66 50 97 18 66 23 30 50 3Z"/><path fill="none" stroke="#2e7d32" stroke-width="2" stroke-linecap="round" d="M50 92V12M50 40 36 30M50 56 66 44M50 72 36 62"/></svg>
+          <svg class="leaf leaf--c" viewBox="0 0 100 100"><path fill="#185a38" d="M50 95C22 92 8 70 10 48 13 24 32 9 52 9c22 0 40 18 39 41-1 25-17 41-41 45Z"/><path fill="none" stroke="#0a2e1c" stroke-width="2" stroke-linecap="round" d="M50 92C52 70 52 45 52 18M51 50 30 36M51 64 74 46"/></svg>
+          <svg class="leaf leaf--d" viewBox="0 0 100 100"><path fill="#2e7d32" d="M50 3C77 30 82 66 50 97 18 66 23 30 50 3Z"/><path fill="none" stroke="#185a38" stroke-width="2" stroke-linecap="round" d="M50 92V12M50 40 36 30M50 56 66 44M50 72 36 62"/></svg>
+          <svg class="leaf leaf--e" viewBox="0 0 100 100"><path fill="#81c784" d="M50 96C24 80 6 56 11 33 15 15 34 8 50 23 66 8 85 15 89 33c5 23-13 47-39 63Z"/><path fill="none" stroke="#2e7d32" stroke-width="2.2" stroke-linecap="round" d="M50 92C49 70 50 45 50 26M50 58 32 44M50 70 68 55M50 46 64 35"/></svg>
         </div>
-        <div class="hero-fade" aria-hidden="true"></div>
-      </section>
-
-      <!-- ===== FEATURE STRIP ===== -->
-      <section class="feature-strip" id="features" aria-label="GrowMate core features">
-        <div class="strip-scroll" role="list">
-          <div class="strip-chip" role="listitem">
-            <span class="chip-icon moss"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20c-3.9-2.2-6-5.1-6-8.5C5 7.9 7.9 5 11.5 5c1.5 0 2.9.5 4 1.5C16.5 5.5 17.8 5 19 5c0 5.8-2.8 10-8 15Z"/><path d="M11 20c.2-4.1 1.7-7.5 4.5-10.5"/></svg></span>
-            <div class="chip-text">
-              <strong>Leafy AI</strong>
-              <span>Scan → identify → care tips</span>
+        <div class="wrap hero__copy">
+          <h1 id="hero-title"><span class="h-line">Grow at <span class="vine-word">home.<svg class="vine" viewBox="0 0 220 34" aria-hidden="true" preserveAspectRatio="none"><path class="vine__stem" d="M4 20C40 30 70 6 110 16s70 18 106-2"/><path class="vine__leaf vine__leaf--1" d="M70 13c-4-10 2-16 12-15-1 9-5 14-12 15Z"/><path class="vine__leaf vine__leaf--2" d="M150 25c8-7 16-5 20 3-9 4-15 3-20-3Z"/></svg></span></span> <span class="h-line">Trade with growers near you.</span></h1>
+          <p class="hero__lede">GrowMate helps Filipinos grow plants and food at home, with care advice made for Philippine weather. It also connects home growers and small nurseries with buyers nearby.</p>
+          <div class="hero__actions">
+            <p class="btn btn--play btn--pending " data-play><svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 2.3 13.9 12l-9.3 9.7c-.4-.2-.6-.7-.6-1.2V3.5c0-.5.2-1 .6-1.2Zm10.4 10.8 2.6 2.7-11 6.3 8.4-9Zm3.8-4.1 3.2 1.8c.9.5.9 1.9 0 2.4l-3.2 1.8-2.9-3 2.9-3Zm-1.2-.7L6.6 2l8.4 9-2.6 2.7.1-.1Z"/></svg><span><small data-play-small>Coming soon to</small> Google Play</span></p>
+            <a class="btn btn--primary btn--apk" href="/growmate.apk" download><svg class="btn__icon btn__icon--stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span><small>Android</small> Download APK</span></a></div>
+          <p class="apk-note">Android only. Your phone may ask you to allow installs from your browser.</p>
+        </div>
+        <div class="wrap devices" aria-label="Screens from the GrowMate app">
+          <figure class="phone devices__side devices__left">
+            <div class="phone__screen">
+              <div class="phone__status" aria-hidden="true">
+                <span>9:41</span>
+                <span class="phone__icons">
+                  <svg viewBox="0 0 14 10"><path d="M0 9h2V5H0v4zm4 0h2V3H4v6zm4 0h2V1H8v8zm4 0h2V0h-2v9z"/></svg>
+                  <svg viewBox="0 0 14 10"><path d="M7 1.2c-2.4 0-4.6.9-6.4 2.5L2 5.2c1.4-1.2 3.1-1.9 5-1.9s3.6.7 5 1.9l1.4-1.5C11.6 2.1 9.4 1.2 7 1.2zm0 3c-1.5 0-2.9.6-4 1.5L4.4 7.2c.7-.7 1.7-1 2.6-1s1.9.3 2.6 1L11 5.7c-1.1-.9-2.5-1.5-4-1.5zm0 3c-.7 0-1.4.3-1.9.8l1.9 1.9 1.9-1.9c-.5-.5-1.2-.8-1.9-.8z"/></svg>
+                  <svg class="phone__battery" viewBox="0 0 22 10"><rect x="0.5" y="0.5" width="18" height="9" rx="2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="19" y="3" width="1.5" height="4" rx="0.4" fill-opacity="0.45"/><rect x="2" y="2" width="15" height="6" rx="1"/></svg>
+                </span>
+              </div>
+              <img src="/img/app/garden.webp" width="784" height="1632" alt="My Garden: JM's Indoor Jungle with five plants" loading="lazy" />
+              <div class="phone__nav" aria-hidden="true">
+                <svg viewBox="0 0 14 14"><path d="M9.5 2.5 4.5 7l5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <svg viewBox="0 0 14 14"><rect x="3" y="3" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              </div>
             </div>
-          </div>
-          <div class="strip-divider" aria-hidden="true"></div>
-          <div class="strip-chip" role="listitem">
-            <span class="chip-icon sky"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h15l-2 8H8L6 7Z"/><path d="M6 7 5.4 4H3"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg></span>
-            <div class="chip-text">
-              <strong>Marketplace</strong>
-              <span>AI-assisted plant listings</span>
+          </figure>
+          <figure class="phone devices__main">
+            <div class="phone__screen">
+              <div class="phone__status" aria-hidden="true">
+                <span>9:41</span>
+                <span class="phone__icons">
+                  <svg viewBox="0 0 14 10"><path d="M0 9h2V5H0v4zm4 0h2V3H4v6zm4 0h2V1H8v8zm4 0h2V0h-2v9z"/></svg>
+                  <svg viewBox="0 0 14 10"><path d="M7 1.2c-2.4 0-4.6.9-6.4 2.5L2 5.2c1.4-1.2 3.1-1.9 5-1.9s3.6.7 5 1.9l1.4-1.5C11.6 2.1 9.4 1.2 7 1.2zm0 3c-1.5 0-2.9.6-4 1.5L4.4 7.2c.7-.7 1.7-1 2.6-1s1.9.3 2.6 1L11 5.7c-1.1-.9-2.5-1.5-4-1.5zm0 3c-.7 0-1.4.3-1.9.8l1.9 1.9 1.9-1.9c-.5-.5-1.2-.8-1.9-.8z"/></svg>
+                  <svg class="phone__battery" viewBox="0 0 22 10"><rect x="0.5" y="0.5" width="18" height="9" rx="2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="19" y="3" width="1.5" height="4" rx="0.4" fill-opacity="0.45"/><rect x="2" y="2" width="15" height="6" rx="1"/></svg>
+                </span>
+              </div>
+              <img src="/img/app/library.webp" width="784" height="1632" alt="Plant Library: 148 plants you can grow in the Philippines, with the Sunflower guide featured" fetchpriority="high" />
+              <div class="phone__nav" aria-hidden="true">
+                <svg viewBox="0 0 14 14"><path d="M9.5 2.5 4.5 7l5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <svg viewBox="0 0 14 14"><rect x="3" y="3" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              </div>
             </div>
-          </div>
-          <div class="strip-divider" aria-hidden="true"></div>
-          <div class="strip-chip" role="listitem">
-            <span class="chip-icon coral"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V9"/><path d="M12 13C7 13 5 10.5 5 6c4.5 0 7 2 7 7Z"/><path d="M12 15c5 0 7-2.5 7-7-4.5 0-7 2-7 7Z"/></svg></span>
-            <div class="chip-text">
-              <strong>Garden Showcase</strong>
-              <span>Show off your collection</span>
+          </figure>
+          <figure class="phone devices__side devices__right">
+            <div class="phone__screen">
+              <div class="phone__status" aria-hidden="true">
+                <span>9:41</span>
+                <span class="phone__icons">
+                  <svg viewBox="0 0 14 10"><path d="M0 9h2V5H0v4zm4 0h2V3H4v6zm4 0h2V1H8v8zm4 0h2V0h-2v9z"/></svg>
+                  <svg viewBox="0 0 14 10"><path d="M7 1.2c-2.4 0-4.6.9-6.4 2.5L2 5.2c1.4-1.2 3.1-1.9 5-1.9s3.6.7 5 1.9l1.4-1.5C11.6 2.1 9.4 1.2 7 1.2zm0 3c-1.5 0-2.9.6-4 1.5L4.4 7.2c.7-.7 1.7-1 2.6-1s1.9.3 2.6 1L11 5.7c-1.1-.9-2.5-1.5-4-1.5zm0 3c-.7 0-1.4.3-1.9.8l1.9 1.9 1.9-1.9c-.5-.5-1.2-.8-1.9-.8z"/></svg>
+                  <svg class="phone__battery" viewBox="0 0 22 10"><rect x="0.5" y="0.5" width="18" height="9" rx="2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="19" y="3" width="1.5" height="4" rx="0.4" fill-opacity="0.45"/><rect x="2" y="2" width="15" height="6" rx="1"/></svg>
+                </span>
+              </div>
+              <img src="/img/app/sell.webp" width="784" height="1632" alt="Seller Center: choose to sell a live plant, seeds or garden supplies" loading="lazy" />
+              <div class="phone__nav" aria-hidden="true">
+                <svg viewBox="0 0 14 14"><path d="M9.5 2.5 4.5 7l5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <svg viewBox="0 0 14 14"><rect x="3" y="3" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              </div>
             </div>
-          </div>
-          <div class="strip-divider" aria-hidden="true"></div>
-          <div class="strip-chip" role="listitem">
-            <span class="chip-icon sun"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v3a4 4 0 0 1-8 0V4Z"/><path d="M8 6H4c0 3 1.4 5 4.2 5.5"/><path d="M16 6h4c0 3-1.4 5-4.2 5.5"/><path d="M12 11v5"/><path d="M9 20h6"/><path d="M10 16h4v4h-4z"/></svg></span>
-            <div class="chip-text">
-              <strong>Rankings</strong>
-              <span>Compete with plantitos</span>
-            </div>
-          </div>
-          <div class="strip-divider" aria-hidden="true"></div>
-          <div class="strip-chip" role="listitem">
-            <span class="chip-icon mint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2h9A3.5 3.5 0 0 1 20 5.5v6A3.5 3.5 0 0 1 16.5 15H11l-5 4v-4.4A3.5 3.5 0 0 1 4 11.5v-6Z"/></svg></span>
-            <div class="chip-text">
-              <strong>Community</strong>
-              <span>Connect with local growers</span>
-            </div>
-          </div>
+          </figure>
         </div>
       </section>
 
-      <!-- ===== LEAFY AI PLAYGROUND ===== -->
-      <section class="playground-section" id="playground" aria-label="Leafy AI interactive demo">
-        <div class="playground-inner">
-          <div class="playground-copy">
-            <p class="section-label">Leafy AI Playground</p>
-            <h2>See it work before you download.</h2>
-            <p class="body-text">Tap any plant and watch Leafy AI identify it, check its safety, and generate care tips — all in seconds.</p>
-            <ul class="feat-list" aria-label="What Leafy AI does">
-              <li><span class="feat-dot" style="background:var(--moss)"></span>Plant identification from photo</li>
-              <li><span class="feat-dot" style="background:var(--sky)"></span>Selling safety check</li>
-              <li><span class="feat-dot" style="background:var(--coral)"></span>Personalised care tips</li>
-              <li><span class="feat-dot" style="background:var(--sun)"></span>AI listing descriptions</li>
+      <!-- The problem -->
+      <section class="band" id="problem" aria-labelledby="problem-title">
+        <div class="wrap">
+          <div data-reveal class="section-head">
+            <h2 id="problem-title">The problem we're solving</h2>
+            <p>Lots of Filipinos want to grow plants and food at home, and lots of small growers have plants to sell. Four things get in the way.</p>
+          </div>
+          <ol class="problems">
+            <li class="problem">
+              <h3>Advice that ignores our weather</h3>
+              <p>Much plant-care advice is written for four-season climates. Here, growers deal with wet and dry seasons, typhoons and strong heat, and plants pay the price.</p>
+            </li>
+            <li class="problem">
+              <h3>Know-how is scattered</h3>
+              <p>What to plant, when to plant it and how to keep it alive is spread across posts, chats and word of mouth. It's hard to know what to trust.</p>
+            </li>
+            <li class="problem">
+              <h3>Small growers are hard to find</h3>
+              <p>Backyard growers and small nurseries often depend on walk-ins and word of mouth to reach buyers, even ones who live a few streets away.</p>
+            </li>
+            <li class="problem">
+              <h3>Buying from strangers is a gamble</h3>
+              <p>Paying ahead for a plant from someone you've never met is risky, so many people never try.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- What GrowMate is -->
+      <section class="band band--soft" id="about" aria-labelledby="about-title">
+        <div class="wrap">
+          <div data-reveal class="section-head">
+            <h2 id="about-title">One app for the whole growing life</h2>
+            <p>GrowMate puts learning, growing, sharing and trading in one place, so each step leads to the next.</p>
+          </div>
+          <ol class="flow">
+            <li class="flow__step">
+              <div class="flow__screen"><img src="/img/app/library.webp" width="784" height="1632" alt="Plant Library screen" loading="lazy" /></div>
+              <h3>Learn</h3>
+              <p>The Plant Library has 148 plants you can grow in the Philippines, with local names like pechay, sitaw and malunggay, and the months they&rsquo;re good to plant.</p>
+            </li>
+            <li class="flow__step">
+              <div class="flow__screen"><img src="/img/app/garden.webp" width="784" height="1632" alt="My Garden screen" loading="lazy" /></div>
+              <h3>Grow</h3>
+              <p>My Garden keeps every plant you own in one place: watering, weather risks, notes and how each one is growing.</p>
+            </li>
+            <li class="flow__step">
+              <div class="flow__screen"><img src="/img/app/discover.webp" width="784" height="1632" alt="Discover screen" loading="lazy" /></div>
+              <h3>Share</h3>
+              <p>Make your garden public and other growers can visit it in Discover.</p>
+            </li>
+            <li class="flow__step">
+              <div class="flow__screen"><img src="/img/app/market.webp" width="392" height="816" alt="Market screen with a staggered feed of plant listings" loading="lazy" /></div>
+              <h3>Trade</h3>
+              <p>Buy and sell live plants, seeds and garden supplies with growers near you, paid in cash on delivery.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Marketplace -->
+      <section class="band" id="market" aria-labelledby="market-title">
+        <div class="wrap split market">
+          <div>
+            <div data-reveal class="section-head section-head--left">
+              <h2 id="market-title">The GrowMate Marketplace</h2>
+              <p>A plant market in your pocket, stocked by home growers and small nurseries. Find it, ask about it, order it, and pay when it arrives.</p>
+            </div>
+            <ul class="market__cats" aria-label="What you can buy">
+              <li>Plants</li>
+              <li>Seedlings</li>
+              <li>Seeds</li>
+              <li>Supplies</li>
+              <li>Tools</li>
+            </ul>
+            <ul class="rows rows--2">
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search and filter</h3>
+              <p>Search plants, seeds and pots, filter by category and plant type, and sort by newest or by price.</p>
+            </li>
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>Know who you're buying from</h3>
+              <p>Every listing shows the seller and where the plant ships from. Verified sellers carry a badge.</p>
+            </li>
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4Z"/></svg>Chat with the seller</h3>
+              <p>Ask about size, care or condition before you order, right inside the app.</p>
+            </li>
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.7a1 1 0 0 0 1-.8L21 7H6"/></svg>Cart and saved listings</h3>
+              <p>Save listings you like and keep plants in your cart until you're ready to order.</p>
+            </li>
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>The fee before you order</h3>
+              <p>Checkout shows the plant price and the delivery fee for your distance before you confirm.</p>
+            </li>
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6"/><path d="M9 12h6"/></svg>Track every order</h3>
+              <p>Follow each order from the seller to your door, and ask for a refund in the app if something is wrong.</p>
+            </li>
             </ul>
           </div>
-
-          <div class="playground-demo" id="playground-demo">
-            <div class="demo-plants" role="group" aria-label="Choose a plant to scan">
-              <button class="demo-plant active" data-plant="monstera" aria-pressed="true" aria-label="Scan Monstera">
-                <img src="/plants/monstera-real.jpg" alt="Monstera" loading="lazy" />
-              </button>
-              <button class="demo-plant" data-plant="orchid" aria-pressed="false" aria-label="Scan Orchid">
-                <img src="/plants/orchid-real.jpg" alt="Orchid" loading="lazy" />
-              </button>
-              <button class="demo-plant" data-plant="pothos" aria-pressed="false" aria-label="Scan Pothos">
-                <img src="/plants/pothos-real.jpg" alt="Pothos" loading="lazy" />
-              </button>
-              <button class="demo-plant" data-plant="succulent" aria-pressed="false" aria-label="Scan Succulent">
-                <img src="/plants/succulent-real.jpg" alt="Succulent" loading="lazy" />
-              </button>
-            </div>
-
-            <div class="demo-stage">
-              <div class="demo-image-wrap" id="demo-image-wrap">
-                <img src="/plants/monstera-real.jpg" alt="Plant being scanned" id="demo-main-img" loading="lazy" />
-                <div class="scan-overlay" id="scan-overlay" aria-hidden="true">
-                  <div class="scan-line" id="scan-line"></div>
-                  <div class="scan-corners">
-                    <span class="sc tl"></span><span class="sc tr"></span>
-                    <span class="sc bl"></span><span class="sc br"></span>
-                  </div>
-                </div>
+        
+          <figure class="phone split__phone">
+            <div class="phone__screen">
+              <div class="phone__status" aria-hidden="true">
+                <span>9:41</span>
+                <span class="phone__icons">
+                  <svg viewBox="0 0 14 10"><path d="M0 9h2V5H0v4zm4 0h2V3H4v6zm4 0h2V1H8v8zm4 0h2V0h-2v9z"/></svg>
+                  <svg viewBox="0 0 14 10"><path d="M7 1.2c-2.4 0-4.6.9-6.4 2.5L2 5.2c1.4-1.2 3.1-1.9 5-1.9s3.6.7 5 1.9l1.4-1.5C11.6 2.1 9.4 1.2 7 1.2zm0 3c-1.5 0-2.9.6-4 1.5L4.4 7.2c.7-.7 1.7-1 2.6-1s1.9.3 2.6 1L11 5.7c-1.1-.9-2.5-1.5-4-1.5zm0 3c-.7 0-1.4.3-1.9.8l1.9 1.9 1.9-1.9c-.5-.5-1.2-.8-1.9-.8z"/></svg>
+                  <svg class="phone__battery" viewBox="0 0 22 10"><rect x="0.5" y="0.5" width="18" height="9" rx="2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="19" y="3" width="1.5" height="4" rx="0.4" fill-opacity="0.45"/><rect x="2" y="2" width="15" height="6" rx="1"/></svg>
+                </span>
               </div>
-
-              <div class="scan-idle" id="scan-idle">
-                <button class="scan-btn" id="scan-btn" aria-label="Scan this plant with Leafy AI">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                  Scan with Leafy AI
-                </button>
-              </div>
-
-              <div class="scan-result" id="scan-result" hidden aria-live="assertive">
-                <div class="result-row">
-                  <div>
-                    <p class="result-name" id="result-name">Monstera deliciosa</p>
-                    <p class="result-common" id="result-common">Swiss Cheese Plant</p>
-                  </div>
-                  <span class="result-badge" id="result-badge">✅ Safe</span>
-                </div>
-                <div class="result-tags" id="result-tags">
-                  <span>🌤️ Indirect light</span>
-                  <span>💧 7 days</span>
-                  <span>🌡️ 18–27°C</span>
-                </div>
-                <p class="result-tip" id="result-tip">Thrives in bright indirect light. Wipe leaves monthly. Mildly toxic to pets — disclose when selling.</p>
-                <button class="result-reset" id="result-reset">← Try another plant</button>
+              <img src="/img/app/market.webp" width="392" height="816" alt="The GrowMate Marketplace screen: search, category chips and a staggered feed of sample listings, starting with calamansi and a pink orchid" loading="lazy" />
+              <div class="phone__nav" aria-hidden="true">
+                <svg viewBox="0 0 14 14"><path d="M9.5 2.5 4.5 7l5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <svg viewBox="0 0 14 14"><rect x="3" y="3" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
               </div>
             </div>
+            <figcaption class="phone__caption">Sample listings</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Digital agriculture -->
+      <section class="band" id="agri" aria-labelledby="agri-title">
+        <div class="wrap split">
+          <div>
+            <div data-reveal class="section-head section-head--left">
+              <h2 id="agri-title">Digital agriculture for home growers</h2>
+              <p>The tools farmers rely on, sized for a balcony, a backyard or a small plot.</p>
+            </div>
+            <ul class="rows">
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v1.5"/><path d="M5.6 5.6l1 1"/><path d="M3 12h1.5"/><path d="M8.5 11a4 4 0 0 1 7.6-1.6"/><path d="M17.5 20H8a4 4 0 1 1 .9-7.9A5 5 0 0 1 18.5 13a3.5 3.5 0 0 1-1 7Z"/></svg>Weather-aware care</h3>
+              <p>Care tips follow the weather where you are, so you know when heat, rain or a storm puts a plant at risk.</p>
+            </li>
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M8 14h3v3H8z"/></svg>A planting calendar</h3>
+              <p>Plants show the months they're good to plant, so you sow at the right time of year.</p>
+            </li>
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 16-9 0 12-4 16-9 16Z"/><path d="M4 20c3-3 6-6 10-9"/></svg>Food you can grow</h3>
+              <p>61 of the plants in the library are edible, from leafy greens to vegetables and herbs.</p>
+            </li>
+              <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M16 4h3a1 1 0 0 1 1 1v3"/><path d="M20 16v3a1 1 0 0 1-1 1h-3"/><path d="M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 12h8"/></svg>Scan and records</h3>
+              <p>Identify a plant with your camera, then log watering and growth so your next decision is based on what happened.</p>
+            </li>
+            </ul>
+          </div>
+          <figure class="phone split__phone">
+            <div class="phone__screen">
+              <div class="phone__status" aria-hidden="true">
+                <span>9:41</span>
+                <span class="phone__icons">
+                  <svg viewBox="0 0 14 10"><path d="M0 9h2V5H0v4zm4 0h2V3H4v6zm4 0h2V1H8v8zm4 0h2V0h-2v9z"/></svg>
+                  <svg viewBox="0 0 14 10"><path d="M7 1.2c-2.4 0-4.6.9-6.4 2.5L2 5.2c1.4-1.2 3.1-1.9 5-1.9s3.6.7 5 1.9l1.4-1.5C11.6 2.1 9.4 1.2 7 1.2zm0 3c-1.5 0-2.9.6-4 1.5L4.4 7.2c.7-.7 1.7-1 2.6-1s1.9.3 2.6 1L11 5.7c-1.1-.9-2.5-1.5-4-1.5zm0 3c-.7 0-1.4.3-1.9.8l1.9 1.9 1.9-1.9c-.5-.5-1.2-.8-1.9-.8z"/></svg>
+                  <svg class="phone__battery" viewBox="0 0 22 10"><rect x="0.5" y="0.5" width="18" height="9" rx="2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="19" y="3" width="1.5" height="4" rx="0.4" fill-opacity="0.45"/><rect x="2" y="2" width="15" height="6" rx="1"/></svg>
+                </span>
+              </div>
+              <video class="phone__video" data-tour src="/img/app/app-tour.mp4" poster="/img/app/scan.webp" width="588" height="1224" muted loop playsinline preload="metadata" aria-label="Video of the GrowMate app: the Scan screen, then scrolling through a real My Garden, then the Discover feed of community gardens"></video>
+              <div class="phone__nav" aria-hidden="true">
+                <svg viewBox="0 0 14 14"><path d="M9.5 2.5 4.5 7l5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <svg viewBox="0 0 14 14"><rect x="3" y="3" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Plant Clinic (coming soon) -->
+      <section class="band band--soft clinic" id="clinic" aria-labelledby="clinic-title">
+        <div class="wrap clinic__inner">
+          <div class="section-head section-head--left" data-reveal>
+            <h2 id="clinic-title">Plant Clinic <span class="soon">Coming soon</span></h2>
+            <p>Book a video call with a plant specialist when a plant is struggling. Show them the plant on camera and get written advice for your conditions.</p>
+            <p class="clinic__note">Plant Clinic is still being set up. Specialists, prices and booking open in the app when it launches.</p>
+          </div>
+          <ol class="clinic__steps">
+            <li class="clinic__step">
+              <span class="clinic__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+              <div>
+                <h3>Choose a specialist</h3>
+                <p>Horticulturists for ornamentals and houseplants, agronomists for crops and food plants.</p>
+              </div>
+            </li>
+            <li class="clinic__step">
+              <span class="clinic__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg></span>
+              <div>
+                <h3>Pick a time</h3>
+                <p>Choose an open slot and add the session to your phone calendar.</p>
+              </div>
+            </li>
+            <li class="clinic__step">
+              <span class="clinic__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12c0-4-3-6-7-6 0 4 3 6 7 6Z"/><path d="M12 12c0-4 3-7 7-7 0 4-3 7-7 7Z"/></svg></span>
+              <div>
+                <h3>Share the plant</h3>
+                <p>Attach the plant from My Garden so the specialist sees its details before the call.</p>
+              </div>
+            </li>
+            <li class="clinic__step">
+              <span class="clinic__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3"/></svg></span>
+              <div>
+                <h3>Look at it together</h3>
+                <p>On the video call, show the leaves, stems, roots and soil on camera.</p>
+              </div>
+            </li>
+            <li class="clinic__step">
+              <span class="clinic__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6Z"/><path d="M9 10h6"/><path d="M9 14h6"/><path d="M9 18h4"/></svg></span>
+              <div>
+                <h3>Get notes after</h3>
+                <p>The specialist leaves written care steps in My sessions.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Local economy -->
+      <section class="band band--dark" id="economy" aria-labelledby="economy-title">
+        <div class="wrap">
+          <div data-reveal class="section-head">
+            <h2 id="economy-title">Keeping the plant economy local</h2>
+            <p>GrowMate is built for buying and selling close to home, so the earning stays with local people.</p>
+          </div>
+          <ul class="rows rows--dark rows--2">
+            <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg>Growers become sellers</h3>
+              <p>Home growers and small nurseries can sell live plants, seeds and garden supplies from their phone, through the Seller Center.</p>
+            </li>
+            <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Closer costs less</h3>
+              <p>Delivery is priced by distance, so buying from a grower near you is the cheaper choice.</p>
+            </li>
+            <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M15.5 9.6A6 6 0 1 1 9.6 15.5"/><path d="M9 6.5v5"/></svg>Local people do the earning</h3>
+              <p>The seller earns from the sale, and a GrowMate rider earns the delivery fee.</p>
+            </li>
+            <li class="row">
+              <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>Trust is built in</h3>
+              <p>Verified sellers carry a badge, you pay only when the plant arrives, and every delivery ends with a photo.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Impact -->
+      <section class="band" id="impact" aria-labelledby="impact-title">
+        <div class="wrap">
+          <div data-reveal class="section-head">
+            <h2 id="impact-title">Who it helps</h2>
+            <p>GrowMate is built so that everyone around a plant gains something from it.</p>
+          </div>
+          <ul class="rows rows--3">
+            <li class="row">
+              <h3>Home growers</h3>
+              <p>Grow plants and food with confidence, even if it's your first plant, with advice made for the weather where you live.</p>
+            </li>
+            <li class="row">
+              <h3>Local sellers &amp; nurseries</h3>
+              <p>A shop on the phones of buyers nearby. No cash to chase from riders: GrowMate pays you after delivery.</p>
+            </li>
+            <li class="row">
+              <h3>Communities &amp; environment</h3>
+              <p>More food and greenery grown close to home, plants that travel shorter distances, and gardens that pass know-how from neighbour to neighbour.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Sellers -->
+      <section class="band band--soft" id="sellers" aria-labelledby="sellers-title">
+        <div class="wrap split split--reverse">
+          <figure class="phone split__phone">
+            <div class="phone__screen">
+              <div class="phone__status" aria-hidden="true">
+                <span>9:41</span>
+                <span class="phone__icons">
+                  <svg viewBox="0 0 14 10"><path d="M0 9h2V5H0v4zm4 0h2V3H4v6zm4 0h2V1H8v8zm4 0h2V0h-2v9z"/></svg>
+                  <svg viewBox="0 0 14 10"><path d="M7 1.2c-2.4 0-4.6.9-6.4 2.5L2 5.2c1.4-1.2 3.1-1.9 5-1.9s3.6.7 5 1.9l1.4-1.5C11.6 2.1 9.4 1.2 7 1.2zm0 3c-1.5 0-2.9.6-4 1.5L4.4 7.2c.7-.7 1.7-1 2.6-1s1.9.3 2.6 1L11 5.7c-1.1-.9-2.5-1.5-4-1.5zm0 3c-.7 0-1.4.3-1.9.8l1.9 1.9 1.9-1.9c-.5-.5-1.2-.8-1.9-.8z"/></svg>
+                  <svg class="phone__battery" viewBox="0 0 22 10"><rect x="0.5" y="0.5" width="18" height="9" rx="2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="19" y="3" width="1.5" height="4" rx="0.4" fill-opacity="0.45"/><rect x="2" y="2" width="15" height="6" rx="1"/></svg>
+                </span>
+              </div>
+              <img src="/img/app/seller-center.webp" width="588" height="1224" alt="Seller Center, Products tab: live listings for Calamansi, Golden Pothos and Hoya with stock controls and Edit and Pause buttons" loading="lazy" />
+              <div class="phone__nav" aria-hidden="true">
+                <svg viewBox="0 0 14 14"><path d="M9.5 2.5 4.5 7l5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <svg viewBox="0 0 14 14"><rect x="3" y="3" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              </div>
+            </div>
+          </figure>
+          <div>
+            <div data-reveal class="section-head section-head--left">
+              <h2 id="sellers-title">For sellers</h2>
+              <p>List it, hand it over, get paid. You never have to collect cash from a rider.</p>
+            </div>
+            <ol class="numbered">
+              <li><h3>List your plants</h3><p>Add photos and a price from the Seller Center in the app.</p></li>
+              <li><h3>Hand it to the rider</h3><p>When an order comes in, a GrowMate rider comes to pick it up. Give them your pickup PIN.</p></li>
+              <li><h3>Get paid by GrowMate</h3><p>GrowMate pays you after the plant is delivered. The delivery fee is paid by the buyer and goes to the rider.</p></li>
+            </ol>
           </div>
         </div>
       </section>
 
-      <!-- ===== TWO-PATHWAY SPLIT ===== -->
-      <section class="pathways-section" id="pathways" aria-label="GrowMate user pathways">
-        <div class="pathways-header">
-          <p class="section-label">Built for every plant lover</p>
-          <h2>Which one are you?</h2>
-        </div>
-        <div class="pathways-grid">
+      <!-- How buying works -->
+      <section class="band" id="buying" aria-labelledby="buying-title">
+        <div class="wrap">
+          <div data-reveal class="section-head">
+            <h2 id="buying-title">How buying works</h2>
+            <p>Every plant you buy travels the same route, from the seller to your door, and you pay only when it arrives.</p>
+          </div>
+          <ol class="grid grid--4 steps">
+            <li class="card step">
+              <span class="card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5Z"/><path d="M3 7.5 12 12l9-4.5"/><path d="M12 12v9"/></svg></span>
+              <h3>Seller</h3>
+              <p>Packs your plant and hands it to the rider with a pickup PIN. Only the seller can see the PIN.</p>
+            </li>
+            <li class="card step">
+              <span class="card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="17" r="3.5"/><circle cx="18" cy="17" r="3.5"/><path d="M6 17 9.5 9H14l4 8"/><path d="M8 6h3"/></svg></span>
+              <h3>Rider</h3>
+              <p>A GrowMate rider picks the plant up and brings it straight to your address.</p>
+            </li>
+            <li class="card step">
+              <span class="card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h13v4"/><path d="M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2Z"/><circle cx="16" cy="14.5" r="1.2"/></svg></span>
+              <h3>Buyer</h3>
+              <p>You pay the rider in cash: the plant price plus the delivery fee. The rider takes a photo as proof of delivery.</p>
+            </li>
+            <li class="card step">
+              <span class="card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg></span>
+              <h3>Seller paid</h3>
+              <p>GrowMate pays the seller after delivery. If something is wrong with your plant, you can ask for a refund in the app.</p>
+            </li>
+          </ol>
 
-          <div class="pathway gardener-path" id="pw-gardener" tabindex="0" role="region" aria-label="The Gardener pathway">
-            <div class="pw-phone">
-              <div class="pw-phone-frame">
-                <div class="phone-notch"></div>
-                <img src="/landing-garden.png" alt="GrowMate garden showcase screen" id="pw-gardener-img" loading="lazy" />
+          <div class="fare" id="fare">
+            <form class="fare__calc" aria-labelledby="calc-title" onsubmit="return false">
+              <h3 id="calc-title">Work out a delivery fee</h3>
+              <div class="field">
+                <label for="km">Distance from the seller <output for="km" data-km-out>5 km</output></label>
+                <input type="range" id="km" min="1" max="30" step="1" value="5" data-km />
+                <p class="field__hint">Straight-line distance. Road distance is estimated at 1.25 times that: <output data-road-out>6.25 km</output>.</p>
               </div>
-            </div>
-            <div class="pw-copy">
-              <span class="pw-tag moss-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V9"/><path d="M12 13C7 13 5 10.5 5 6c4.5 0 7 2 7 7Z"/><path d="M12 15c5 0 7-2.5 7-7-4.5 0-7 2-7 7Z"/></svg> The Gardener</span>
-              <h3>Showcase your collection.<br/>Track every plant.</h3>
-              <ul class="pw-list">
-                <li>Build a public garden profile visitors can browse</li>
-                <li>Track care schedules and plant history</li>
-                <li>Earn badges and climb the community rankings</li>
-              </ul>
-              <a class="cta-outline" href="/growmate.apk" download>Start your garden →</a>
-            </div>
-          </div>
-
-          <div class="pathway seller-path" id="pw-seller" tabindex="0" role="region" aria-label="The Seller pathway">
-            <div class="pw-phone">
-              <div class="pw-phone-frame">
-                <div class="phone-notch"></div>
-                <img src="/landing-market.png" alt="GrowMate marketplace screen" id="pw-seller-img" loading="lazy" />
-              </div>
-            </div>
-            <div class="pw-copy">
-              <span class="pw-tag sky-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h15l-2 8H8L6 7Z"/><path d="M6 7 5.4 4H3"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg> The Seller</span>
-              <h3>Create listings with AI.<br/>Sell plants safely.</h3>
-              <ul class="pw-list">
-                <li>Leafy AI writes your listing descriptions</li>
-                <li>Built-in safety checks before you post</li>
-                <li>Reach local buyers — delivery or meetup</li>
-              </ul>
-              <a class="cta-outline" href="/growmate.apk" download>Start selling →</a>
+              <fieldset class="field">
+                <legend>Plant price</legend>
+                <div class="chips" role="radiogroup">
+                  <label><input type="radio" name="price" value="250" /> <span>₱250</span></label>
+                  <label><input type="radio" name="price" value="500" /> <span>₱500</span></label>
+                  <label><input type="radio" name="price" value="1000" checked /> <span>₱1,000</span></label>
+                  <label><input type="radio" name="price" value="2500" /> <span>₱2,500</span></label>
+                </div>
+              </fieldset>
+              <p class="fare__formula">Delivery fee = ₱40 + ₱6 per road km, minimum ₱50.</p>
+            </form>
+            <div class="fare__receipt" aria-live="polite" aria-labelledby="receipt-title">
+              <h3 id="receipt-title">You pay the rider</h3>
+              <p class="fare__total" data-total>₱1,078</p>
+              <dl>
+                <div><dt>Plant price</dt><dd data-price-out>₱1,000</dd></div>
+                <div><dt>Delivery fee, kept by the rider</dt><dd data-fee>₱78</dd></div>
+              </dl>
+              <p class="fare__note">An estimate. The app shows your exact fee at checkout, before you place the order.</p>
             </div>
           </div>
 
+          <ul class="rules">
+            <li><strong>Cash on delivery only.</strong> Online payment isn't available yet.</li>
+            <li><strong>GrowMate riders deliver.</strong> Pickup and seller delivery are off for now.</li>
+            <li><strong>Photo proof.</strong> Every delivery is completed with a camera photo from the rider.</li>
+            <li><strong>Refunds.</strong> If something is wrong with your plant, ask in the app and GrowMate reviews it. A refund covers the plant price; the delivery fee stays with the rider.</li>
+          </ul>
         </div>
       </section>
 
-      <!-- ===== SOCIAL PROOF ===== -->
-      <section class="social-section" id="community" aria-label="GrowMate user testimonials">
-        <div class="social-inner">
-          <p class="section-label">Real growers. Real results.</p>
-          <h2>Plantitos and plantitas love it.</h2>
-
-          <div class="cards-viewport" id="cards-viewport">
-            <div class="cards-track" id="cards-track">
-
-              <article class="proof-card" aria-label="Testimonial from Aling Rosa">
-                <div class="card-top">
-                  <img src="/avatars/avatar-aling.png" alt="Aling Rosa" class="card-avatar" loading="lazy" />
-                  <div class="card-meta">
-                    <strong>Aling Rosa</strong>
-                    <span>Quezon City · Garden seller</span>
-                    <div class="card-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                  </div>
-                </div>
-                <blockquote>"Dati nahihirapan akong maglista ng plants. Ngayon, pini-picture ko lang at si Leafy AI ang bahala. Naibenta ko ang Monstera ko sa loob ng isang araw!"</blockquote>
-                <div class="card-plant">
-                  <img src="/plants/monstera-real.jpg" alt="Monstera sold" loading="lazy" />
-                  <span>Monstera deliciosa · sold for ₱850</span>
-                </div>
-              </article>
-
-              <article class="proof-card" aria-label="Testimonial from Miguel Santos">
-                <div class="card-top">
-                  <img src="/avatars/avatar-miguel.png" alt="Miguel Santos" class="card-avatar" loading="lazy" />
-                  <div class="card-meta">
-                    <strong>Miguel Santos</strong>
-                    <span>Cebu City · Plant collector</span>
-                    <div class="card-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                  </div>
-                </div>
-                <blockquote>"Ang ganda ng Garden feature! Puwede mong i-showcase lahat ng plants mo. Parang Instagram pero para sa mga halaman. 10/10 irerekomenda ko sa lahat!"</blockquote>
-                <div class="card-plant">
-                  <img src="/plants/orchid-real.jpg" alt="Orchid collection" loading="lazy" />
-                  <span>Orchid collection · 23 followers</span>
-                </div>
-              </article>
-
-              <article class="proof-card" aria-label="Testimonial from Maria Cruz">
-                <div class="card-top">
-                  <img src="/avatars/avatar-maria.png" alt="Maria Cruz" class="card-avatar" loading="lazy" />
-                  <div class="card-meta">
-                    <strong>Maria Cruz</strong>
-                    <span>Davao City · Beginner plantita</span>
-                    <div class="card-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                  </div>
-                </div>
-                <blockquote>"Hindi ako marunong mag-alaga ng plants dati. Ang Leafy AI ng GrowMate sinasabihan niya ako kung kailan mag-water at kung kailangan ng araw. Super helpful!"</blockquote>
-                <div class="card-plant">
-                  <img src="/plants/pothos-real.jpg" alt="Pothos plants" loading="lazy" />
-                  <span>Golden Pothos · 12 plants tracked</span>
-                </div>
-              </article>
-
-            </div>
+      <!-- Closing call -->
+      <section class="cta" id="get" aria-labelledby="final-title">
+        <div class="wrap cta__inner">
+          <h2 id="final-title">Tara, magtanim. Let's grow together.</h2>
+          <p>GrowMate is in pre-beta and coming to Android, on Google Play.</p>
+          <div class="cta__actions"><p class="btn btn--play btn--pending btn--lg" data-play><svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 2.3 13.9 12l-9.3 9.7c-.4-.2-.6-.7-.6-1.2V3.5c0-.5.2-1 .6-1.2Zm10.4 10.8 2.6 2.7-11 6.3 8.4-9Zm3.8-4.1 3.2 1.8c.9.5.9 1.9 0 2.4l-3.2 1.8-2.9-3 2.9-3Zm-1.2-.7L6.6 2l8.4 9-2.6 2.7.1-.1Z"/></svg><span><small data-play-small>Coming soon to</small> Google Play</span></p>
+          <a class="btn btn--primary btn--apk btn--lg" href="/growmate.apk" download><svg class="btn__icon btn__icon--stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span><small>Android</small> Download APK</span></a>
           </div>
-
-          <div class="card-dots" id="card-dots" role="tablist" aria-label="Testimonial navigation">
-            <button class="dot active" data-idx="0" role="tab" aria-selected="true" aria-label="Testimonial 1"></button>
-            <button class="dot" data-idx="1" role="tab" aria-selected="false" aria-label="Testimonial 2"></button>
-            <button class="dot" data-idx="2" role="tab" aria-selected="false" aria-label="Testimonial 3"></button>
-          </div>
+          <p class="apk-note">Android only. Your phone may ask you to allow installs from your browser.</p>
         </div>
       </section>
 
-      <!-- ===== LIVE STATS ===== -->
-      <section class="stats-section" aria-label="GrowMate community statistics">
-        <div class="stats-inner">
-          <p class="section-label" style="color:var(--sky)">The community is growing</p>
-          <div class="stats-grid">
-            <div class="stat-item">
-              <span class="stat-number" data-target="5102" data-prefix="" data-suffix="" id="stat-0">0</span>
-              <span class="stat-label">Gardeners Growing</span>
-            </div>
-            <div class="stat-div" aria-hidden="true"></div>
-            <div class="stat-item">
-              <span class="stat-number" data-target="12430" data-prefix="" data-suffix="" id="stat-1">0</span>
-              <span class="stat-label">Plants Tracked</span>
-            </div>
-            <div class="stat-div" aria-hidden="true"></div>
-            <div class="stat-item">
-              <span class="stat-number" data-target="250" data-prefix="₱" data-suffix="K+" id="stat-2">₱0K+</span>
-              <span class="stat-label">Pesos Traded</span>
-            </div>
-          </div>
+      <!-- Partners & recognition -->
+      <section class="partners" aria-labelledby="partners-title">
+        <div class="wrap">
+          <h2 id="partners-title" class="partners__title">Partners &amp; recognition</h2>
+          <ul class="partners__list">
+            <li class="partner" data-reveal>
+              <img class="partner__logo" src="/img/partners/da-logo.png" alt="Department of Agriculture logo" width="64" height="64" loading="lazy" onerror="this.remove()" />
+              <p><span class="partner__role">Partner</span><span class="partner__name">Department of Agriculture</span><span class="partner__sub">Republic of the Philippines</span></p>
+            </li>
+            <li class="partner" data-reveal>
+              <span class="partner__badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M17 6h2.5a1.5 1.5 0 0 1 1.5 1.5c0 2.5-2 4.5-4.5 4.5"/><path d="M7 6H4.5A1.5 1.5 0 0 0 3 7.5C3 10 5 12 7.5 12"/></svg></span>
+              <p><span class="partner__role">Winner</span><span class="partner__name">Young Farmers Challenge 2026</span><span class="partner__sub">Department of Agriculture</span></p>
+            </li>
+          </ul>
         </div>
       </section>
-
-      <!-- ===== FINAL CTA ===== -->
-      <section class="final-cta" id="download" aria-label="Download GrowMate">
-        <div class="cta-leaves" aria-hidden="true">
-          <span class="leaf l1"></span>
-          <span class="leaf l2"></span>
-          <span class="leaf l3"></span>
-          <span class="leaf l4"></span>
-          <span class="leaf l5"></span>
-        </div>
-        <div class="cta-content">
-          <p class="section-label" style="color:var(--moss)">Free Android APK · No sign-up required</p>
-          <h2>Join the plant community.<br/>Start growing today.</h2>
-          <p class="cta-body">Download the GrowMate demo build. Runs on any Android phone or emulator.</p>
-          <a class="cta-primary cta-xl" href="/growmate.apk" download>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download GrowMate APK
-          </a>
-          <p class="cta-sub">Android 8.0+ · 61 MB · Latest build</p>
-        </div>
-      </section>
-
     </main>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer" aria-label="GrowMate footer">
-      <a class="footer-brand" href="#top" aria-label="Back to top">
-        <img src="/growmate-logo.png" alt="" width="34" height="34" />
-        <span>GrowMate</span>
-      </a>
-      <p class="footer-text">Grow smart, grow safe. Marketplace, community, garden showcase, and Leafy AI.</p>
-      <a class="footer-link" href="#top" aria-label="Scroll back to top">Back to top ↑</a>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="site-footer__top">
+          <div class="site-footer__brand">
+            <a class="brand" href="/">
+              <img src="/img/growmate-logo-128.webp" alt="" width="32" height="32" />
+              <span>GrowMate</span>
+            </a>
+            <p>Plant care, home growing and a local plant market for the Philippines. Formerly Plantita.</p>
+          </div>
+          <nav class="site-footer__cols" aria-label="Footer">
+            <div>
+              <h2>Shop</h2>
+              <ul>
+                <li><a href="/#market">Marketplace</a></li>
+                <li><a href="/#buying">How buying works</a></li>
+                <li><a href="/buyer-terms">Buyer Terms</a></li>
+                <li><a href="/returns-refunds">Returns &amp; Refunds</a></li>
+                <li><a href="/delivery-cod">Delivery &amp; COD</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Sell</h2>
+              <ul>
+                <li><a href="/#sellers">Selling on GrowMate</a></li>
+                <li><a href="/seller-agreement">Seller Agreement</a></li>
+                <li><a href="/seller-agreement#fees">Seller fees</a></li>
+                <li><a href="/marketplace-rules">Seller rules</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Deliver</h2>
+              <ul>
+                <li><a href="/rider-agreement">Rider Agreement</a></li>
+                <li><a href="/delivery-cod">Delivery Policy</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Legal</h2>
+              <ul>
+                <li><a href="/terms">Terms &amp; Conditions</a></li>
+                <li><a href="/privacy">Privacy Notice</a></li>
+                <li><a href="/cookies">Cookie Policy</a></li>
+                <li><a href="/marketplace-rules#prohibited">Prohibited products</a></li>
+                <li><a href="/acceptable-use">Acceptable Use</a></li>
+                <li><a href="/intellectual-property">Intellectual Property</a></li>
+                <li><a href="/disputes">Disputes &amp; Complaints</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Company</h2>
+              <ul>
+                <li><a href="/#about">About GrowMate</a></li>
+                <li><a href="/contact">Contact us</a></li>
+                <li><a href="/legal">Legal &amp; business info</a></li>
+                <li><a href="/contact#report">Report an issue</a></li>
+                <li><a href="/contact#privacy">Privacy request</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="site-footer__bottom">
+          <p>&copy; 2026 GrowMate. All rights reserved.</p>
+          <ul>
+            <li><a href="/leafy">Meet Leafy</a></li>
+            <li><a href="/games">Plant memory game</a></li>
+          </ul>
+        </div>
+      </div>
     </footer>
 
     <script src="/script.js" defer></script>
