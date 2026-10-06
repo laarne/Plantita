@@ -60,6 +60,7 @@ export const footerHtml = `<footer class="site-footer">
               <ul>
                 <li><a href="/terms">Terms &amp; Conditions</a></li>
                 <li><a href="/privacy">Privacy Notice</a></li>
+                <li><a href="/delete-account">Account Deletion</a></li>
                 <li><a href="/cookies">Cookie Policy</a></li>
                 <li><a href="/marketplace-rules#prohibited">Prohibited products</a></li>
                 <li><a href="/acceptable-use">Acceptable Use</a></li>

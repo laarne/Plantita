@@ -5,6 +5,7 @@ const ph = (text = TBC) => `<span class="ph">${text}</span>`;
 const mail = (addr, subject) =>
   `<a href="mailto:${addr}${subject ? `?subject=${encodeURIComponent(subject)}` : ""}">${addr}</a>`;
 const support = (subject) => mail(legal.supportEmail, subject);
+const privacy = (subject) => mail(legal.privacyEmail, subject);
 const L = (href, text) => `<a href="${href}">${text}</a>`;
 const val = (v) => (v === TBC ? ph() : v);
 const HOLD = "7 days";
@@ -140,6 +141,91 @@ export const rulePages = [
         </ul>
         <p>If you find a security problem, report it to ${support("Security report")} and do not exploit it.</p>` },
       { id: "enforcement", h: "Enforcement", html: `<p>GrowMate may remove content, limit features, suspend or close accounts, and report illegal activity to the authorities.</p>` },
+    ],
+  },
+
+  // ── M. Account Deletion Request ──────────────────────────────────────────
+  {
+    slug: "delete-account",
+    title: "Account Deletion Request",
+    description: "How to delete your Plantita account and request erasure of your personal data under the Data Privacy Act of 2012.",
+    lede: "Plantita provides two ways to delete your account: immediate in-app deletion through the mobile application, or a public request via web/email if you cannot access the app.",
+    sections: [
+      {
+        id: "identification",
+        h: "About Plantita & Account Deletion",
+        html: `
+        <p><strong>Plantita</strong> (operated as GrowMate) is a botanical companion and community marketplace in the Philippines. We respect your privacy and provide transparent controls to delete your account and personal data at any time, in full compliance with Republic Act No. 10173 (Data Privacy Act of 2012) and Google Play Data Safety requirements.</p>
+        <p>Account deletion is permanent. Once completed, your profile, plant care logs, active listings, and associated personal information cannot be recovered.</p>`,
+      },
+      {
+        id: "in-app",
+        h: "Method 1: Immediate In-App Deletion (Recommended)",
+        html: `
+        <p>If you have the Plantita mobile application installed on your device, you can delete your account immediately using authenticated in-app controls:</p>
+        <ol>
+          <li>Open the <strong>Plantita</strong> app on your Android or iOS device.</li>
+          <li>Ensure you are signed in to the account you want to delete.</li>
+          <li>Tap the <strong>Profile</strong> tab in the bottom navigation bar.</li>
+          <li>Tap the <strong>Settings</strong> icon (drawer/gear) in the top corner to open the Settings menu.</li>
+          <li>Scroll to the account section and select <strong>Delete Account</strong>.</li>
+          <li>Review the warning dialog and confirm your choice.</li>
+        </ol>
+        <p><strong>Result:</strong> The application securely executes the authenticated deletion Edge Function. Your active sessions are revoked immediately, your profile is marked deleted, active listings are unpublished, and your credentials are purged.</p>`,
+      },
+      {
+        id: "web-request",
+        h: "Method 2: Public Web & Email Deletion Request",
+        html: `
+        <p>If you have uninstalled the application, lost access to your device, or prefer to request deletion via the web, you may submit an erasure request directly without logging in:</p>
+        <p>Send an email to our support team at ${mail(legal.supportEmail, "Account Deletion Request")} with the subject line <strong>Account Deletion Request</strong>.</p>
+        <h3>Required Information</h3>
+        <p>To identify your account and prevent unauthorized deletions, please include the following details in your message:</p>
+        <ul>
+          <li><strong>Account Email:</strong> The Google account email address registered with Plantita. (Requests must be sent from or confirmed via this address).</li>
+          <li><strong>Display Name / Username:</strong> Your profile name as displayed in the Plantita application.</li>
+          <li><strong>Statement of Request:</strong> A clear statement such as: <em>"I request the permanent deletion of my Plantita account and erasure of all associated personal data."</em></li>
+          <li><strong>Role Details (if applicable):</strong> If you registered as a seller or rider, please provide your registered shop name or rider full name to expedite verification.</li>
+        </ul>
+        <p><a class="btn btn--primary btn--sm" href="${mail(legal.supportEmail, "Account Deletion Request")}">Submit Deletion Request by Email</a></p>
+        <p><strong>Processing Timeline:</strong> Our privacy and support team will verify your identity and process your deletion request within <strong>30 calendar days</strong>, as stipulated by the Data Privacy Act of 2012. You will receive an email confirmation once the process is complete.</p>`,
+      },
+      {
+        id: "data-scope",
+        h: "What Data is Deleted",
+        html: `
+        <p>Upon processing an account deletion request, the following information is permanently erased or anonymized:</p>
+        <ul>
+          <li><strong>Account & Profile:</strong> Authentication record, email address, profile photo, display name, username, biography, and garden settings.</li>
+          <li><strong>Addresses & Geolocation:</strong> Saved delivery addresses, pickup locations, and device location preferences.</li>
+          <li><strong>Botanical Content:</strong> Saved garden plants, scan logs, watering reminders, and personal notes.</li>
+          <li><strong>Marketplace Listings:</strong> All active, pending, or draft listings and associated photo uploads.</li>
+          <li><strong>Communications:</strong> Direct message drafts, support communications, and AI assistant interaction histories.</li>
+        </ul>`,
+      },
+      {
+        id: "retention",
+        h: "Exceptions & Legitimate Retention Requirements",
+        html: `
+        <p>In accordance with Philippine law, account deletion may be delayed or certain limited records retained under the following circumstances:</p>
+        <ul>
+          <li><strong>Unresolved Orders in Progress:</strong> If you have an active order that is pending confirmation, preparing, or out for delivery with a courier, the account cannot be deleted until the delivery is completed or cancelled.</li>
+          <li><strong>Financial Settlements & COD Remittance:</strong> If you are a buyer, seller, or rider with outstanding cash-on-delivery collections, pending remittance deposits, or undisbursed earnings, account deletion is deferred until all balances are fully settled and reconciled.</li>
+          <li><strong>Disputes, Returns & Refunds:</strong> If there is an active after-sales complaint or an open refund request under the 7-day buyer protection window, records are retained until the dispute is resolved.</li>
+          <li><strong>Statutory Record-Keeping Obligations:</strong> Double-entry financial ledger records, transaction receipts, and payment audit logs must be maintained for the retention periods mandated by the Bureau of Internal Revenue (BIR) and the National Internal Revenue Code (NIRC). These records are securely archived and isolated from operational use.</li>
+          <li><strong>Fraud & Security Prevention:</strong> Limited cryptographic hashes or audit trails may be retained where strictly necessary to prevent fraud, enforce platform bans, or defend against legal claims.</li>
+        </ul>`,
+      },
+      {
+        id: "privacy-policy",
+        h: "Privacy Policy & Contact Information",
+        html: `
+        <p>For complete details on how Plantita processes personal data, please review our full ${L("/privacy", "Privacy Notice")} and our ${L("/terms", "Terms &amp; Conditions")}.</p>
+        <p>If you have any questions or concerns regarding your privacy rights, contact our Data Protection team at ${privacy("Privacy Inquiry")} or write to us at:</p>
+        <p><strong>Plantita Support &amp; Privacy Office</strong><br />
+        Email: <a href="mailto:${legal.supportEmail}">${legal.supportEmail}</a><br />
+        Website: <a href="https://www.plantita.online">https://www.plantita.online</a></p>`,
+      },
     ],
   },
 ];
